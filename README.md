@@ -1,4 +1,4 @@
-# QML_ece396
+# Quantum Machine Learning with SVM
 Quantum Machine Learning projects by **Steve Ta**[^eq][^cs], **Coco Gong**[^eq][^cs], and **Sasha Cocquyt**[^eq][^ece].
 
 [^eq]: Equal contributions.
