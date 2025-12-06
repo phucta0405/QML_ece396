@@ -1,0 +1,3 @@
+[submodule "Basic_Dataset"]
+	path = Basic_Dataset
+	url = https://github.com/gerryangelatos/Basic_Datasets/
