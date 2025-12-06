@@ -3,6 +3,7 @@ import argparse
 from sklearn.model_selection import train_test_split
 from basic_datasets import get_bas_example, nsphere_sample, Spiral_sample, Spiral_sample2, Noisy_nsphere_sample
 from models.classical_svm import fit_svm_classifier, predict_svm_classifier
+from models.feed_forward_net import fit_feedforward_classifier, predict_feedforward_classifier
 
 number_of_samples = 200
 
@@ -15,24 +16,23 @@ DATASET_LOADERS = {
 
 MODELS = {
     'classical_svm': (fit_svm_classifier, predict_svm_classifier),
+    "feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
 }
-
-def train_and_test_bas():
-    x_BAS, Y_BAS, BAS_images, xstr_BAS, xstr_BAS_binary = get_bas_example()
-    X_train, X_test, y_train, y_test = train_test_split(x_BAS, Y_BAS, test_size=0.25, random_state=42)
-    clf = fit_svm_classifier(X_train, y_train, kernel='linear', C=1.0)
-    y_pred = predict_svm_classifier(clf, X_test)
-    accuracy = np.mean(y_pred == y_test)
-    print(f"BAS Test accuracy: {accuracy * 100:.2f}%")
-
 
 def train_and_test(dataset: str, model: str):
     if model not in MODELS:
         print(f"Model '{model}' not implemented yet. Use existing models.")
+        return
+    fit_fn, predict_fn = MODELS[model]
     if dataset == 'bas':
-        train_and_test_bas()
+        x_BAS, Y_BAS, BAS_images, xstr_BAS, xstr_BAS_binary = get_bas_example()
+        X_train, X_test, y_train, y_test = train_test_split(x_BAS, Y_BAS, test_size=0.25, random_state=42)
+        clf = fit_fn(X_train, y_train)
+        y_pred = predict_fn(clf, X_test)
+        accuracy = np.mean(y_pred == y_test)
+        print(f"BAS Test accuracy: {accuracy * 100:.2f}%")
     elif dataset == 'nsphere':
-        D_circle = 7
+        D_circle = 3
         N_circle = 1000
         r1, r0 = 1, 0.5
         dr = 0.2
@@ -43,8 +43,8 @@ def train_and_test(dataset: str, model: str):
         rad_circle = np.sqrt(np.sum(x_circle ** 2, axis=1))
         Y_circle = (rad_circle > r_mid).astype(int)
         X_train, X_test, y_train, y_test = train_test_split(x_circle, Y_circle, test_size=0.25, random_state=42, stratify=Y_circle)
-        clf = fit_svm_classifier(X_train, y_train)
-        y_pred = predict_svm_classifier(clf, X_test)
+        clf = fit_fn(X_train, y_train)
+        y_pred = predict_fn(clf, X_test)
         print(f"N-Sphere Test accuracy: {np.mean(y_pred == y_test) * 100:.2f}%")
     elif dataset == 'spiral':
         D_spiral = 2
@@ -58,17 +58,16 @@ def train_and_test(dataset: str, model: str):
         x_spiral = np.dstack((x_spiral1.T, x_spiral0.T)).reshape(D_spiral, N_spiral).T
         Y_spiral = np.dstack((np.ones(int(N_spiral / 2)), np.zeros(int(N_spiral / 2)))).flatten().astype(int)
         X_train, X_test, y_train, y_test = train_test_split(x_spiral, Y_spiral, test_size=0.25, random_state=42, stratify=Y_spiral)
-        clf = fit_svm_classifier(X_train, y_train)
-        y_pred = predict_svm_classifier(clf, X_test)
+        clf = fit_fn(X_train, y_train)
+        y_pred = predict_fn(clf, X_test)
         print(f"Spiral Test accuracy: {np.mean(y_pred == y_test) * 100:.2f}%")
     else:
         print(f"Unknown dataset: {dataset}")
 
-
 def main():
     parser = argparse.ArgumentParser(description="Train and test SVM on basic datasets.")
     parser.add_argument('--dataset', type=str, default='bas', choices=['bas', 'nsphere', 'spiral'], help='Dataset to use')
-    parser.add_argument('--model', type=str, default='classical_svm', choices=['classical_svm'], help='Model to use')
+    parser.add_argument('--model', type=str, default='classical_svm', choices=['classical_svm', 'feedforward'], help='Model to use')
     args = parser.parse_args()
     train_and_test(args.dataset, args.model)
 
