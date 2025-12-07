@@ -7,8 +7,9 @@ from basic_datasets import get_bas_example, nsphere_sample, Spiral_sample, Spira
 from models.classical_svm import fit_svm_classifier, predict_svm_classifier
 from models.feed_forward_net import fit_feedforward_classifier, predict_feedforward_classifier
 from models.transformer import fit_transformer_classifier, predict_transformer_classifier
+from models.quantum_kernel import fit_quantumkernel_classifier, predict_quantumkernel_classifier
 
-number_of_samples = 100000
+number_of_samples = 1000
 
 # Set global seed for reproducibility
 SEED = 42
@@ -32,6 +33,7 @@ MODELS = {
     'classical_svm': (fit_svm_classifier, predict_svm_classifier),
     "feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
     'transformer': (fit_transformer_classifier, predict_transformer_classifier),
+    'quantum_kernel': (fit_quantumkernel_classifier, predict_quantumkernel_classifier),
 }
 
 def train_and_test(dataset: str, model: str):
@@ -39,7 +41,7 @@ def train_and_test(dataset: str, model: str):
         print(f"Model '{model}' not implemented yet. Use existing models.")
         return
     fit_fn, predict_fn = MODELS[model]
-    n_runs = 10
+    n_runs = 1
     accs = []
     for run in range(n_runs):
         # Set seed for each run for reproducibility
@@ -61,7 +63,7 @@ def train_and_test(dataset: str, model: str):
             accs.append(np.mean(y_pred == y_test))
         elif dataset == 'nsphere':
             D_circle = 3
-            N_circle = 100000
+            N_circle = 1000
             r1, r0 = 1, 0.5
             dr = 0.2
             r_mid = (r1 + r0) / 2
@@ -79,7 +81,7 @@ def train_and_test(dataset: str, model: str):
             accs.append(np.mean(y_pred == y_test))
         elif dataset == 'circles':
             D_circle = 2
-            N_circle = 100000
+            N_circle = 1000
             r1, r0 = 1, 0.5
             dr = 0.2
             r_mid = (r1 + r0) / 2
@@ -97,7 +99,7 @@ def train_and_test(dataset: str, model: str):
             accs.append(np.mean(y_pred == y_test))
         elif dataset == 'spiral':
             D_spiral = 2
-            N_spiral = 100000
+            N_spiral = 1000
             cphase = [0, 1]
             Nturns = 4
             Sep = 0.05
@@ -140,7 +142,9 @@ def train_and_test(dataset: str, model: str):
 def main():
     parser = argparse.ArgumentParser(description="Train and test SVM on basic datasets.")
     parser.add_argument('--dataset', type=str, default='bas', choices=['bas', 'nsphere', 'spiral', 'spiral2', 'circles'], help='Dataset to use')
-    parser.add_argument('--model', type=str, default='classical_svm', choices=['classical_svm', 'feedforward', 'transformer'], help='Model to use')
+    parser.add_argument('--model', type=str, default='classical_svm', 
+                        choices=['classical_svm', 'feedforward', 'transformer', 'quantum_kernel'], 
+                        help='Model to use')
     args = parser.parse_args()
     train_and_test(args.dataset, args.model)
 
@@ -148,5 +152,8 @@ if __name__ == "__main__":
     """
      if you want to use residual-block for FeedForwardNet, 
      modify the FeedForwardNet class in models/feed_forward_net.py accordingly
+
+     Same with kernel choice for SVM in models/classical_svm.py, we can
+     use 'rbf' kernel instead of 'linear' by default
     """
     main()

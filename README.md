@@ -24,7 +24,7 @@ python3 train.py --dataset DATASET_NAME --model MODEL_NAME
 ```
 
 - `--dataset` can be one of: `bas`, `nsphere`, `circles`, `spiral`
-- `--model` can be `classical_svm`, `feedforward`, `transformer`
+- `--model` can be `classical_svm`, `feedforward`, `transformer`, `quantum_kernel`
 
 #### Examples 
 
