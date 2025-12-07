@@ -5,7 +5,7 @@ import torch.optim as optim
 from typing import Optional
 
 class FeedForwardNet(nn.Module):
-    def __init__(self, input_dim, hidden_dim=16, num_layers=4, residual=False, num_classes=2, dropout_rate: Optional[float] = None):
+    def __init__(self, input_dim, hidden_dim=16, num_layers=2, residual=False, num_classes=2, dropout_rate: Optional[float] = None):
         super().__init__()
         self.residual = residual
         self.input_layer = nn.Linear(input_dim, hidden_dim)
