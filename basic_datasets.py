@@ -178,7 +178,7 @@ def get_noisy_bas_example(n=2, num_samples=100, noise_level=0.2, seed=42):
     # Add bit-flip noise
     noise_mask = rng.random((num_samples, n*n)) < noise_level
     x_BAS_noisy = np.bitwise_xor(x_BAS, noise_mask.astype(int))
-    # Example label: parity (sum mod 2)
+    # truth labels: parity (sum mod 2)
     Y_BAS = np.sum(x_BAS_noisy, axis=1) % 2
     BAS_images = [x_BAS_noisy[i].reshape(n, n) for i in range(num_samples)]
     xstr_BAS = [str(img) for img in x_BAS_noisy]

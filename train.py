@@ -151,7 +151,8 @@ def train_and_test(dataset: str, model: str):
 
 def main():
     parser = argparse.ArgumentParser(description="Train and test SVM on basic datasets.")
-    parser.add_argument('--dataset', type=str, default='bas', choices=['noisy_bas','bas', 'nsphere', 'spiral', 'spiral2', 'circles'], help='Dataset to use')
+    parser.add_argument('--dataset', type=str, default='bas', 
+                        choices=['noisy_bas','bas', 'nsphere', 'spiral', 'spiral2', 'circles'], help='Dataset to use')
     parser.add_argument('--model', type=str, default='classical_svm', 
                         choices=['classical_svm', 'feedforward', 'transformer', 'quantum_kernel'], 
                         help='Model to use')
