@@ -171,6 +171,21 @@ def get_bas_example():
     return x_BAS, Y_BAS, BAS_images, xstr_BAS, xstr_BAS_binary
 
 
+def get_noisy_bas_example(n=2, num_samples=100, noise_level=0.2, seed=42):
+    """Generate a noisy BAS dataset"""
+    rng = np.random.default_rng(seed)
+    x_BAS = rng.integers(0, 2, size=(num_samples, n*n))
+    # Add bit-flip noise
+    noise_mask = rng.random((num_samples, n*n)) < noise_level
+    x_BAS_noisy = np.bitwise_xor(x_BAS, noise_mask.astype(int))
+    # Example label: parity (sum mod 2)
+    Y_BAS = np.sum(x_BAS_noisy, axis=1) % 2
+    BAS_images = [x_BAS_noisy[i].reshape(n, n) for i in range(num_samples)]
+    xstr_BAS = [str(img) for img in x_BAS_noisy]
+    xstr_BAS_binary = list(range(num_samples))
+    return x_BAS_noisy, Y_BAS, BAS_images, xstr_BAS, xstr_BAS_binary
+
+
 def plot_bas_example(BAS_images, Y_BAS, cutfact=2, figsize=(16,6)):
     """Plot the BAS example dataset in a grid."""
     N_BAS = len(BAS_images)
@@ -184,5 +199,4 @@ def plot_bas_example(BAS_images, Y_BAS, cutfact=2, figsize=(16,6)):
     return fig_BAS, ax_BAS
 
 
-    
-    
+

@@ -3,7 +3,7 @@ import argparse
 import random
 import torch
 from sklearn.model_selection import train_test_split
-from basic_datasets import get_bas_example, nsphere_sample, Spiral_sample, Spiral_sample2, Noisy_nsphere_sample
+from basic_datasets import get_bas_example, nsphere_sample, Spiral_sample, Spiral_sample2, Noisy_nsphere_sample, get_noisy_bas_example
 from models.classical_svm import fit_svm_classifier, predict_svm_classifier
 from models.feed_forward_net import fit_feedforward_classifier, predict_feedforward_classifier
 from models.transformer import fit_transformer_classifier, predict_transformer_classifier
@@ -23,6 +23,7 @@ except Exception:
 
 DATASET_LOADERS = {
     'bas': get_bas_example,
+    'noisy_bas': get_noisy_bas_example,
     'nsphere': lambda: nsphere_sample(number_of_samples, ndim=2),
     'circles': lambda: None,  # sphere but 2 dimensions
     'spiral': lambda: Spiral_sample(dW=0.1, Ns=number_of_samples),
@@ -54,7 +55,16 @@ def train_and_test(dataset: str, model: str):
             pass
         if dataset == 'bas':
             x_BAS, Y_BAS, BAS_images, xstr_BAS, xstr_BAS_binary = get_bas_example()
-            X_train, X_test, y_train, y_test = train_test_split(x_BAS, Y_BAS, test_size=0.25, random_state=42+run)
+            X_train, X_test, y_train, y_test = train_test_split(x_BAS, Y_BAS, test_size=0.25, random_state=42)
+            clf = fit_fn(X_train, y_train)
+            if run == 0 and hasattr(clf, 'parameters'):
+                n_params = sum(p.numel() for p in clf.parameters() if p.requires_grad)
+                print(f"Number of trainable parameters: {n_params}")
+            y_pred = predict_fn(clf, X_test)
+            accs.append(np.mean(y_pred == y_test))
+        elif dataset == 'noisy_bas':
+            x_BAS, Y_BAS, BAS_images, xstr_BAS, xstr_BAS_binary = get_noisy_bas_example(n=2, num_samples=1000, noise_level=0.2, seed=42)
+            X_train, X_test, y_train, y_test = train_test_split(x_BAS, Y_BAS, test_size=0.25, random_state=42)
             clf = fit_fn(X_train, y_train)
             if run == 0 and hasattr(clf, 'parameters'):
                 n_params = sum(p.numel() for p in clf.parameters() if p.requires_grad)
@@ -141,7 +151,7 @@ def train_and_test(dataset: str, model: str):
 
 def main():
     parser = argparse.ArgumentParser(description="Train and test SVM on basic datasets.")
-    parser.add_argument('--dataset', type=str, default='bas', choices=['bas', 'nsphere', 'spiral', 'spiral2', 'circles'], help='Dataset to use')
+    parser.add_argument('--dataset', type=str, default='bas', choices=['noisy_bas','bas', 'nsphere', 'spiral', 'spiral2', 'circles'], help='Dataset to use')
     parser.add_argument('--model', type=str, default='classical_svm', 
                         choices=['classical_svm', 'feedforward', 'transformer', 'quantum_kernel'], 
                         help='Model to use')
