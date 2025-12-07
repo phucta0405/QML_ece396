@@ -5,7 +5,7 @@ import torch.optim as optim
 from typing import Optional
 
 class FeedForwardNet(nn.Module):
-    def __init__(self, input_dim, hidden_dim=8, num_layers=2, residual=False, num_classes=2, dropout_rate: Optional[float] = None):
+    def __init__(self, input_dim, hidden_dim=16, num_layers=4, residual=False, num_classes=2, dropout_rate: Optional[float] = None):
         super().__init__()
         self.residual = residual
         self.input_layer = nn.Linear(input_dim, hidden_dim)
@@ -28,7 +28,7 @@ class FeedForwardNet(nn.Module):
         return self.output_layer(out)
 
 
-def fit_feedforward_classifier(X: np.ndarray, Y: np.ndarray, hidden_dim=8, num_layers=2, residual=False, num_classes=2, epochs=100, lr=0.01, verbose=False, dropout_rate: Optional[float] = None)  -> FeedForwardNet:
+def fit_feedforward_classifier(X: np.ndarray, Y: np.ndarray, hidden_dim=16, num_layers=2, residual=False, num_classes=2, epochs=100, lr=0.01, verbose=False, dropout_rate: Optional[float] = None)  -> FeedForwardNet:
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     X_tensor = torch.tensor(X, dtype=torch.float32).to(device)
     Y_tensor = torch.tensor(Y, dtype=torch.long).to(device)
