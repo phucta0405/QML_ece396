@@ -26,7 +26,7 @@ python3 train.py --dataset DATASET_NAME --model MODEL_NAME
 - `--dataset` can be one of: `bas`, `nsphere`, `circles`, `spiral`
 - `--model` can be `classical_svm`, `feedforward`, `transformer`
 
-#### Examples
+#### Examples 
 
 Train and test on Bars and Stripes:
 ```bash
@@ -50,6 +50,6 @@ python3 train.py --dataset nsphere --model classical_svm
 
 ### 3. Output
 
-The script will print the test accuracy for the selected dataset and model.
+The script will print the test accuracy for the selected dataset and model along with standard deviations (more statistics will come)
 
 ---

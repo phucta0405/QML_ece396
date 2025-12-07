@@ -145,4 +145,8 @@ def main():
     train_and_test(args.dataset, args.model)
 
 if __name__ == "__main__":
+    """
+     if you want to use residual-block for FeedForwardNet, 
+     modify the FeedForwardNet class in models/feed_forward_net.py accordingly
+    """
     main()
