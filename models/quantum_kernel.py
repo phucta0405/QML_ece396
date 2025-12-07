@@ -54,32 +54,8 @@ def kernel_circuit(x1: np.ndarray, x2: np.ndarray) -> float:
 
     return float(np.abs(inner) ** 2)
 
-""" This is for shot-based simulation, which is slower in practice.
-def kernel_circuit(x1: np.ndarray, x2: np.ndarray, shots=128, backend = DEFAULT_BACKEND) -> float:
-    x1 = np.asarray(x1, dtype=float) 
-    x2 = np.asarray(x2, dtype=float) 
-    if x1.shape != x2.shape: 
-        raise ValueError("Input vectors must have the same dimension.") 
-    n = x1.shape[0] 
-
-    qc = QuantumCircuit(n) 
-    qc.compose(feature_map(x1), inplace=True) 
-    qc.compose(feature_map(x2).inverse(), inplace=True) 
-    c = ClassicalRegister(n) 
-    qc.add_register(c) 
-    qc.measure(range(n), range(n)) 
-
-    transpiled_qc = transpile(qc, backend) 
-    result = backend.run(transpiled_qc, shots=shots).result() 
-    counts = result.get_counts() 
-    prob_zero = counts.get('0' * n, 0) / sum(counts.values()) 
-
-    return prob_zero
-"""
-
 
 def compute_quantum_kernel_matrix(X1: np.ndarray, X2: Optional[np.ndarray] = None) -> np.ndarray:
-    
     X1 = np.asarray(X1, dtype=float)
     symmetric = X2 is None
     if symmetric:
@@ -92,22 +68,30 @@ def compute_quantum_kernel_matrix(X1: np.ndarray, X2: Optional[np.ndarray] = Non
     if n_features != n_features_2:
         raise ValueError("X1 and X2 must have the same number of features.")
 
-    K = np.empty((n1, n2), dtype=float)
+    # convert data points to statevectors
+    dim = 2**n_features
+    zero_state = Statevector.from_label("0" * n_features)
+    
+    # pre-compute statevectors for X1
+    states1 = np.zeros((n1, dim), dtype=complex)
+    for i in range(n1):
+        qc = feature_map(X1[i])
+        states1[i] = zero_state.evolve(qc).data
 
-    # for speeding up computation in the symmetric case
-    if symmetric and n1 == n2:
-        # only compute upper triangle and mirror down
-        for i in range(n1):
-            for j in range(i, n2):
-                val = kernel_circuit(X1[i], X2[j])
-                K[i, j] = val
-                if i != j:
-                    K[j, i] = val
+    # pre-compute statevectors for X2
+    if symmetric:
+        states2 = states1
     else:
-        # otherwise, compute all entries
-        for i in range(n1):
-            for j in range(n2):
-                K[i, j] = kernel_circuit(X1[i], X2[j])
+        states2 = np.zeros((n2, dim), dtype=complex)
+        for i in range(n2):
+            qc = feature_map(X2[i])
+            states2[i] = zero_state.evolve(qc).data
+
+    # compute the kernel matrix using matrix multiplication
+    # K_ij = |<psi_i|psi_j>|^2
+    # inner_products matrix shape will be (n1, n2)
+    inner_products = states1 @ states2.conj().T
+    K = np.abs(inner_products)**2
 
     return K
 
@@ -123,9 +107,7 @@ def fit_quantumkernel_classifier(X: np.ndarray, Y: np.ndarray, C: float = 1.0) -
     Y = np.asarray(Y)
     K_train = compute_quantum_kernel_matrix(X)
     svc_model = svm.SVC(kernel="precomputed", C=C)
-    print("Hi")
     svc_model.fit(K_train, Y)
-    print("Hi")
     return QuantumKernelClassifier(svc=svc_model, X_train=X)
 
 
@@ -133,4 +115,3 @@ def predict_quantumkernel_classifier(clf: QuantumKernelClassifier, X: np.ndarray
     X = np.asarray(X, dtype=float)
     K_test = compute_quantum_kernel_matrix(X, clf.X_train)
     return clf.svc.predict(K_test)
-
