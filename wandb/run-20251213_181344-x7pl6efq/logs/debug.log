@@ -14,3 +14,8 @@ config: {'sweep_type': 'nsphere_dim', 'model': 'quantum_vc', 'min_dim': 2, 'max_
 2025-12-13 18:13:45,424 INFO    MainThread:43532 [wandb_run.py:_redirect():2438] Wrapping output streams.
 2025-12-13 18:13:45,424 INFO    MainThread:43532 [wandb_run.py:_redirect():2461] Redirects installed.
 2025-12-13 18:13:45,425 INFO    MainThread:43532 [wandb_init.py:init():1081] run started, returning control to user process
+2025-12-13 20:40:21,440 INFO    MainThread:43532 [wandb_run.py:_finish():2287] finishing run quanntum_ml/qml-classification/x7pl6efq
+2025-12-13 20:40:21,445 INFO    MainThread:43532 [wandb_run.py:_atexit_cleanup():2486] got exitcode: 0
+2025-12-13 20:40:21,451 INFO    MainThread:43532 [wandb_run.py:_restore():2468] restore
+2025-12-13 20:40:21,452 INFO    MainThread:43532 [wandb_run.py:_restore():2474] restore done
+2025-12-13 20:40:21,994 INFO    MainThread:43532 [wandb_run.py:_footer_sync_info():3862] logging synced files

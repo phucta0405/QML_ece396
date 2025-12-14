@@ -4,3 +4,9 @@
 {"time":"2025-12-13T19:01:34.915961-05:00","level":"INFO","msg":"stream: started","id":"wpb8g2dc"}
 {"time":"2025-12-13T19:01:34.916061-05:00","level":"INFO","msg":"writer: started","stream_id":"wpb8g2dc"}
 {"time":"2025-12-13T19:01:34.916097-05:00","level":"INFO","msg":"sender: started","stream_id":"wpb8g2dc"}
+{"time":"2025-12-13T19:14:01.209189-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-13T19:14:01.382605-05:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-12-13T19:14:01.393001-05:00","level":"INFO","msg":"stream: closing","id":"wpb8g2dc"}
+{"time":"2025-12-13T19:14:01.393442-05:00","level":"INFO","msg":"handler: closed","stream_id":"wpb8g2dc"}
+{"time":"2025-12-13T19:14:01.393908-05:00","level":"INFO","msg":"sender: closed","stream_id":"wpb8g2dc"}
+{"time":"2025-12-13T19:14:01.393928-05:00","level":"INFO","msg":"stream: closed","id":"wpb8g2dc"}

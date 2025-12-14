@@ -50,7 +50,7 @@ def train_and_test(dataset: str, model: str):
 
     # Initialize wandb
     wandb.init(
-        project="qml-classification",
+        project="qml-classifications",
         config={
             "dataset": dataset,
             "model": model,
