@@ -8,6 +8,7 @@ from models.classical_svm import fit_svm_classifier, predict_svm_classifier
 from models.feed_forward_net import fit_feedforward_classifier, predict_feedforward_classifier
 from models.transformer import fit_transformer_classifier, predict_transformer_classifier
 from models.quantum_kernel import fit_quantumkernel_classifier, predict_quantumkernel_classifier
+from quantum_vc1 import train_vqc1, predict_vqc1
 
 number_of_samples = 1000
 
@@ -37,6 +38,7 @@ MODELS = {
     "feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
     'transformer': (fit_transformer_classifier, predict_transformer_classifier),
     'quantum_kernel': (fit_quantumkernel_classifier, predict_quantumkernel_classifier),
+    'quantum_vc1': (train_vqc1, predict_vqc1),
 }
 
 def train_and_test(dataset: str, model: str):
@@ -139,8 +141,8 @@ def main():
     parser.add_argument('--dataset', type=str, default='bas', 
                         choices=['bas', 'nsphere', 'spiral', 'spiral2', 'circles'], help='Dataset to use')
     parser.add_argument('--model', type=str, default='classical_svm', 
-                        choices=['classical_svm', 'feedforward', 'transformer', 'quantum_kernel'], 
-                        help='Model to use')
+                    choices=['classical_svm', 'feedforward', 'transformer', 'quantum_kernel', 'quantum_vc1'], 
+                    help='Model to use')
     args = parser.parse_args()
     train_and_test(args.dataset, args.model)
 

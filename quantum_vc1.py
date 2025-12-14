@@ -1,6 +1,7 @@
 import numpy as np
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector, SparsePauliOp
+from qiskit_algorithms.optimizers import SPSA
 from scipy.optimize import minimize
 from dataclasses import dataclass
 
@@ -64,31 +65,33 @@ class VQC:
     n_layers: int
 
 # train function with progress every 10%
-def train_vqc1(X, Y, n_layers=2, maxiter=20, seed=42):
+def train_vqc1(X, Y, n_layers=2, maxiter=100, seed=42, batch_size=30):
     rng = np.random.default_rng(seed)
     n_qubits = X.shape[1]
     n_params = n_layers * 3 * n_qubits
     init_theta = rng.uniform(0, 2*np.pi, n_params)
 
-    iteration_times = []
-    progress_percent = np.arange(10, 101, 10)
-    next_progress_idx = 0
+    # SPSA objective function using mini batches
+    def objective_function(theta):
+        # random batch indices
+        idxs = rng.choice(len(X), size=min(len(X), batch_size), replace=False)
+        return loss(theta, X[idxs], Y[idxs], n_layers)
 
-    def callback(xk):
-        nonlocal next_progress_idx
-        iteration_times.append(1)
-        iter_done = len(iteration_times)
-        percent_done = iter_done / maxiter * 100
-        if next_progress_idx < len(progress_percent) and percent_done >= progress_percent[next_progress_idx]:
-            loss_val = loss(xk, X, Y, n_layers)
-            print(f"{progress_percent[next_progress_idx]}% complete - loss: {loss_val:.4f}")
-            next_progress_idx += 1
+    # callback to monitor progress
+    loss_history = []
+    iteration_count = 0
 
-    res = minimize(lambda t: loss(t, X, Y, n_layers),
-                   init_theta,
-                   method='L-BFGS-B',
-                   options={'maxiter': maxiter},
-                   callback=callback)
+    def callback(n_fev, params, fval, step_size, accepted):
+        nonlocal iteration_count
+        loss_history.append(fval)
+        iteration_count += 1
+        if iteration_count % 10 == 0:
+            print(f"Step {iteration_count}/{maxiter} - Batch Loss: {fval:.4f}")
+
+    optimizer = SPSA(maxiter=maxiter, callback=callback, learning_rate=0.1, perturbation=0.1)
+
+    res = optimizer.minimize(fun=objective_function, x0=init_theta)
+
     return VQC(theta=res.x, n_layers=n_layers)
 
 def predict_vqc1(model: VQC, X):
