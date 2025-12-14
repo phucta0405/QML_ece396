@@ -3,6 +3,7 @@ import argparse
 import random
 import torch
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
 from basic_datasets import get_bas_example, nsphere_sample, Spiral_sample, Spiral_sample2, Noisy_nsphere_sample, get_noisy_bas_example
 from models.classical_svm import fit_svm_classifier, predict_svm_classifier
 from models.feed_forward_net import fit_feedforward_classifier, predict_feedforward_classifier
@@ -56,7 +57,13 @@ def train_and_test(dataset: str, model: str):
             if run == 0 and hasattr(clf, 'parameters'):
                 n_params = sum(p.numel() for p in clf.parameters() if p.requires_grad)
                 print(f"Number of trainable parameters: {n_params}")
+
             y_pred = predict_fn(clf, X_test)
+
+            if run == 0:
+                print(f"Classification Report (Run {run})")
+                print(classification_report(y_test, y_pred))
+
             accs.append(np.mean(y_pred == y_test))
         elif dataset == 'nsphere':
             D_circle = 3
@@ -111,6 +118,11 @@ def train_and_test(dataset: str, model: str):
                 n_params = sum(p.numel() for p in clf.parameters() if p.requires_grad)
                 print(f"Number of trainable parameters: {n_params}")
             y_pred = predict_fn(clf, X_test)
+
+            if run == 0:
+                print(f"Classification Report (Run {run})")
+                print(classification_report(y_test, y_pred))
+
             accs.append(np.mean(y_pred == y_test))
         elif dataset == 'spiral2':
             D_spiral = 2

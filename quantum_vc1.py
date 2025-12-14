@@ -8,11 +8,10 @@ from dataclasses import dataclass
 # implementing simple encoding (Stoudenmire and Schwab): xi --> [cos(xi*pi/2), sin(xi*pi/2)]
 # try different encodings discussed in Benedetti if time
 def encode(x):
-    x = np.clip(x, -1.0, 1.0)
     n = len(x)
     qc = QuantumCircuit(n)
     for i in range(n):
-        qc.ry(np.pi * x[i], i)
+        qc.ry(x[i] * 5.0, i)
     return qc
 
 # variational layer (RX, RY, RZ + CZ ring)
@@ -65,30 +64,33 @@ class VQC:
     n_layers: int
 
 # train function with progress every 10%
-def train_vqc1(X, Y, n_layers=2, maxiter=100, seed=42, batch_size=30):
+def train_vqc1(X, Y, n_layers=2, maxiter=150, seed=42, batch_size=30):
     rng = np.random.default_rng(seed)
     n_qubits = X.shape[1]
     n_params = n_layers * 3 * n_qubits
     init_theta = rng.uniform(0, 2*np.pi, n_params)
 
+    subset_size = min(len(X), 100) 
+    idxs = rng.choice(len(X), size=subset_size, replace=False)
+    X_train_subset = X[idxs]
+    Y_train_subset = Y[idxs]
+
     # SPSA objective function using mini batches
     def objective_function(theta):
-        # random batch indices
-        idxs = rng.choice(len(X), size=min(len(X), batch_size), replace=False)
-        return loss(theta, X[idxs], Y[idxs], n_layers)
+        return loss(theta, X_train_subset, Y_train_subset, n_layers)
 
     # callback to monitor progress
     loss_history = []
     iteration_count = 0
 
-    def callback(n_fev, params, fval, step_size, accepted):
+    def callback(_n_fev, _params, fval, _step_size, _accepted):
         nonlocal iteration_count
         loss_history.append(fval)
         iteration_count += 1
         if iteration_count % 10 == 0:
             print(f"Step {iteration_count}/{maxiter} - Batch Loss: {fval:.4f}")
 
-    optimizer = SPSA(maxiter=maxiter, callback=callback, learning_rate=0.1, perturbation=0.1)
+    optimizer = SPSA(maxiter=maxiter, callback=callback, learning_rate=0.5, perturbation=0.2)
 
     res = optimizer.minimize(fun=objective_function, x0=init_theta)
 
