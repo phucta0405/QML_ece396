@@ -1,0 +1,21 @@
+2025-12-13 00:40:55,142 INFO    MainThread:65017 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /Users/phucta/QML_ece396/wandb/run-20251213_004055-3x6m2tes/logs/debug.log
+2025-12-13 00:40:55,142 INFO    MainThread:65017 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /Users/phucta/QML_ece396/wandb/run-20251213_004055-3x6m2tes/logs/debug-internal.log
+2025-12-13 00:40:55,142 INFO    MainThread:65017 [wandb_init.py:init():841] calling init triggers
+2025-12-13 00:40:55,142 INFO    MainThread:65017 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'sweep_type': 'spiral_dim', 'model': 'transformer', 'min_dim': 2, 'max_dim': 20, 'step': 1, 'num_samples': 10000, 'n_runs': 3, '_wandb': {}}
+2025-12-13 00:40:55,143 INFO    MainThread:65017 [wandb_init.py:init():889] starting backend
+2025-12-13 00:40:55,143 INFO    MainThread:65017 [wandb_init.py:init():892] sending inform_init request
+2025-12-13 00:40:55,144 INFO    MainThread:65017 [wandb_init.py:init():900] backend started and connected
+2025-12-13 00:40:55,145 INFO    MainThread:65017 [wandb_init.py:init():970] updated telemetry
+2025-12-13 00:40:55,163 INFO    MainThread:65017 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2025-12-13 00:40:55,492 INFO    MainThread:65017 [wandb_init.py:init():1041] starting run threads in backend
+2025-12-13 00:40:55,533 INFO    MainThread:65017 [wandb_run.py:_console_start():2521] atexit reg
+2025-12-13 00:40:55,533 INFO    MainThread:65017 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2025-12-13 00:40:55,533 INFO    MainThread:65017 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2025-12-13 00:40:55,533 INFO    MainThread:65017 [wandb_run.py:_redirect():2461] Redirects installed.
+2025-12-13 00:40:55,534 INFO    MainThread:65017 [wandb_init.py:init():1081] run started, returning control to user process
+2025-12-13 00:41:37,734 INFO    MainThread:65017 [wandb_run.py:_finish():2287] finishing run quanntum_ml/qml-classification/3x6m2tes
+2025-12-13 00:41:37,735 INFO    MainThread:65017 [wandb_run.py:_atexit_cleanup():2486] got exitcode: 0
+2025-12-13 00:41:37,735 INFO    MainThread:65017 [wandb_run.py:_restore():2468] restore
+2025-12-13 00:41:37,735 INFO    MainThread:65017 [wandb_run.py:_restore():2474] restore done
+2025-12-13 00:41:38,377 INFO    MainThread:65017 [wandb_run.py:_footer_sync_info():3862] logging synced files

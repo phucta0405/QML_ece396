@@ -2,7 +2,7 @@ import numpy as np
 from sklearn import svm
 
 
-def fit_svm_classifier(X: np.ndarray, Y: np.ndarray, kernel: str = 'rbf', C: float = 1.0, gamma: str = 'scale') -> svm.SVC:
+def fit_svm_classifier(X: np.ndarray, Y: np.ndarray, kernel: str = 'sigmoid', C: float = 1.0, gamma: str = 'scale') -> svm.SVC:
     """Train a SVM classifier on the given dataset.
 
     Args:

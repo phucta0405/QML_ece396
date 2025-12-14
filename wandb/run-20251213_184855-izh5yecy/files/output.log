@@ -1,0 +1,59 @@
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 339, in <module>
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 222, in sweep_spiral_dim
+    clf = fit_fn(X_train, y_train)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 99, in train_vqc
+    result = minimize(
+             ^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_minimize.py", line 784, in minimize
+    res = _minimize_lbfgsb(fun, x0, args, jac, bounds,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_lbfgsb_py.py", line 469, in _minimize_lbfgsb
+    f, g = func_and_grad(x)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 404, in fun_and_grad
+    self._update_grad()
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 366, in _update_grad
+    self.g = self._wrapped_grad(self.x, f0=self.f)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 41, in __call__
+    g, dct = approx_derivative(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 593, in approx_derivative
+    J, _nfev = _dense_difference(fun_wrapped, x0, f0, h,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 686, in _dense_difference
+    df = [f_eval - f0 for f_eval in f_evals]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 686, in <listcomp>
+    df = [f_eval - f0 for f_eval in f_evals]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 879, in __call__
+    f = np.atleast_1d(self.fun(x, *self.args, **self.kwargs))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/_util.py", line 590, in __call__
+    fx = self.f(np.copy(x), *self.args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 85, in loss_fn
+    preds = vqc_predict_prob_batch(X, params, n_layers)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 68, in vqc_predict_prob_batch
+    states = vqc_state_batch(X, params, n_layers)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 54, in vqc_state_batch
+    states.append(Statevector.from_label("0" * n_qubits).evolve(qc))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 400, in evolve
+    return self._evolve_instruction(ret, other, qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 976, in _evolve_instruction
+    Statevector._evolve_instruction(statevec, instruction.operation, qargs=new_qargs)
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 914, in _evolve_instruction
+    mat = Operator._instruction_to_matrix(obj)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/operators/operator.py", line 792, in _instruction_to_matrix
+    @classmethod
+
+KeyboardInterrupt

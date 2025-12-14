@@ -1,0 +1,34 @@
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 258, in <module>
+    if __name__ == "__main__":
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 217, in sweep_spiral_dim
+    X_train, X_test, y_train, y_test = train_test_split(x_spiral, y_spiral, test_size=0.25, random_state=42+run, stratify=y_spiral)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_kernel.py", line 116, in predict_quantumkernel_classifier
+    K_test = compute_quantum_kernel_matrix(X, clf.X_train)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_kernel.py", line 88, in compute_quantum_kernel_matrix
+    states2[i] = zero_state.evolve(qc).data
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 400, in evolve
+    return self._evolve_instruction(ret, other, qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 976, in _evolve_instruction
+    Statevector._evolve_instruction(statevec, instruction.operation, qargs=new_qargs)
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 918, in _evolve_instruction
+    return Statevector._evolve_operator(statevec, Operator(mat), qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 876, in _evolve_operator
+    axes_inv = np.argsort(axes).tolist()
+               ^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/numpy/_core/fromnumeric.py", line 1242, in argsort
+    return _wrapfunc(
+           ^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/numpy/_core/fromnumeric.py", line 54, in _wrapfunc
+    return _wrapit(obj, method, *args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/numpy/_core/fromnumeric.py", line 46, in _wrapit
+    result = getattr(arr, method)(*args, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

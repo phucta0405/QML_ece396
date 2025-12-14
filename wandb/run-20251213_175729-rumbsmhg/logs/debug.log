@@ -1,0 +1,21 @@
+2025-12-13 17:57:29,103 INFO    MainThread:43060 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2025-12-13 17:57:29,103 INFO    MainThread:43060 [wandb_setup.py:_flush():80] Configure stats pid to 43060
+2025-12-13 17:57:29,104 INFO    MainThread:43060 [wandb_setup.py:_flush():80] Loading settings from /Users/phucta/.config/wandb/settings
+2025-12-13 17:57:29,104 INFO    MainThread:43060 [wandb_setup.py:_flush():80] Loading settings from /Users/phucta/QML_ece396/wandb/settings
+2025-12-13 17:57:29,104 INFO    MainThread:43060 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-12-13 17:57:29,104 INFO    MainThread:43060 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /Users/phucta/QML_ece396/wandb/run-20251213_175729-rumbsmhg/logs/debug.log
+2025-12-13 17:57:29,105 INFO    MainThread:43060 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /Users/phucta/QML_ece396/wandb/run-20251213_175729-rumbsmhg/logs/debug-internal.log
+2025-12-13 17:57:29,105 INFO    MainThread:43060 [wandb_init.py:init():841] calling init triggers
+2025-12-13 17:57:29,105 INFO    MainThread:43060 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'sweep_type': 'spiral_dim', 'model': 'quantum_vc', 'min_dim': 2, 'max_dim': 20, 'step': 1, 'num_samples': 10000, 'n_runs': 3, '_wandb': {}}
+2025-12-13 17:57:29,105 INFO    MainThread:43060 [wandb_init.py:init():889] starting backend
+2025-12-13 17:57:29,362 INFO    MainThread:43060 [wandb_init.py:init():892] sending inform_init request
+2025-12-13 17:57:29,412 INFO    MainThread:43060 [wandb_init.py:init():900] backend started and connected
+2025-12-13 17:57:29,449 INFO    MainThread:43060 [wandb_init.py:init():970] updated telemetry
+2025-12-13 17:57:29,484 INFO    MainThread:43060 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2025-12-13 17:57:29,851 INFO    MainThread:43060 [wandb_init.py:init():1041] starting run threads in backend
+2025-12-13 17:57:29,945 INFO    MainThread:43060 [wandb_run.py:_console_start():2521] atexit reg
+2025-12-13 17:57:29,945 INFO    MainThread:43060 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2025-12-13 17:57:29,945 INFO    MainThread:43060 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2025-12-13 17:57:29,945 INFO    MainThread:43060 [wandb_run.py:_redirect():2461] Redirects installed.
+2025-12-13 17:57:29,950 INFO    MainThread:43060 [wandb_init.py:init():1081] run started, returning control to user process

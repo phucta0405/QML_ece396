@@ -1,0 +1,27 @@
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_setup.py:_flush():80] Configure stats pid to 64398
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_setup.py:_flush():80] Loading settings from /Users/phucta/.config/wandb/settings
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_setup.py:_flush():80] Loading settings from /Users/phucta/QML_ece396/wandb/settings
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /Users/phucta/QML_ece396/wandb/run-20251213_003158-msiv76to/logs/debug.log
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /Users/phucta/QML_ece396/wandb/run-20251213_003158-msiv76to/logs/debug-internal.log
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_init.py:init():841] calling init triggers
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'sweep_type': 'spiral_dim', 'model': 'classical_svm', 'min_dim': 2, 'max_dim': 10, 'step': 2, 'num_samples': 10000, 'n_runs': 3, '_wandb': {}}
+2025-12-13 00:31:58,051 INFO    MainThread:64398 [wandb_init.py:init():889] starting backend
+2025-12-13 00:31:58,721 INFO    MainThread:64398 [wandb_init.py:init():892] sending inform_init request
+2025-12-13 00:31:58,751 INFO    MainThread:64398 [wandb_init.py:init():900] backend started and connected
+2025-12-13 00:31:58,765 INFO    MainThread:64398 [wandb_init.py:init():970] updated telemetry
+2025-12-13 00:31:58,778 INFO    MainThread:64398 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2025-12-13 00:31:59,319 INFO    MainThread:64398 [wandb_init.py:init():1041] starting run threads in backend
+2025-12-13 00:31:59,383 INFO    MainThread:64398 [wandb_run.py:_console_start():2521] atexit reg
+2025-12-13 00:31:59,383 INFO    MainThread:64398 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2025-12-13 00:31:59,383 INFO    MainThread:64398 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2025-12-13 00:31:59,383 INFO    MainThread:64398 [wandb_run.py:_redirect():2461] Redirects installed.
+2025-12-13 00:31:59,385 INFO    MainThread:64398 [wandb_init.py:init():1081] run started, returning control to user process
+2025-12-13 00:32:18,160 INFO    MainThread:64398 [wandb_run.py:_config_callback():1396] config_cb ('_wandb', 'visualize', 'classical_svm_acc_vs_dim') {'panel_type': 'Vega2', 'panel_config': {'panelDefId': 'wandb/lineseries/v0', 'fieldSettings': {'step': 'step', 'lineKey': 'lineKey', 'lineVal': 'lineVal'}, 'stringSettings': {'title': 'classical_svm accuracy vs. dimension', 'xname': 'dimension'}, 'transform': {'name': 'tableWithLeafColNames'}, 'userQuery': {'queryFields': [{'name': 'runSets', 'args': [{'name': 'runSets', 'value': '${runSets}'}], 'fields': [{'name': 'id', 'fields': []}, {'name': 'name', 'fields': []}, {'name': '_defaultColorIndex', 'fields': []}, {'name': 'summaryTable', 'args': [{'name': 'tableKey', 'value': 'classical_svm_acc_vs_dim_table'}], 'fields': []}]}]}}} None
+2025-12-13 00:32:18,893 INFO    MainThread:64398 [wandb_run.py:_finish():2287] finishing run quanntum_ml/qml-classification/msiv76to
+2025-12-13 00:32:18,893 INFO    MainThread:64398 [wandb_run.py:_atexit_cleanup():2486] got exitcode: 0
+2025-12-13 00:32:18,894 INFO    MainThread:64398 [wandb_run.py:_restore():2468] restore
+2025-12-13 00:32:18,894 INFO    MainThread:64398 [wandb_run.py:_restore():2474] restore done
+2025-12-13 00:32:20,132 INFO    MainThread:64398 [wandb_run.py:_footer_sync_info():3862] logging synced files

@@ -1,0 +1,16 @@
+2025-12-13 00:32:35,295 INFO    MainThread:64398 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /Users/phucta/QML_ece396/wandb/run-20251213_003235-3tet2ccc/logs/debug.log
+2025-12-13 00:32:35,295 INFO    MainThread:64398 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /Users/phucta/QML_ece396/wandb/run-20251213_003235-3tet2ccc/logs/debug-internal.log
+2025-12-13 00:32:35,296 INFO    MainThread:64398 [wandb_init.py:init():841] calling init triggers
+2025-12-13 00:32:35,296 INFO    MainThread:64398 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'sweep_type': 'spiral_dim', 'model': 'quantum_kernel', 'min_dim': 2, 'max_dim': 10, 'step': 2, 'num_samples': 10000, 'n_runs': 3, '_wandb': {}}
+2025-12-13 00:32:35,296 INFO    MainThread:64398 [wandb_init.py:init():889] starting backend
+2025-12-13 00:32:35,296 INFO    MainThread:64398 [wandb_init.py:init():892] sending inform_init request
+2025-12-13 00:32:35,296 INFO    MainThread:64398 [wandb_init.py:init():900] backend started and connected
+2025-12-13 00:32:35,305 INFO    MainThread:64398 [wandb_init.py:init():970] updated telemetry
+2025-12-13 00:32:35,321 INFO    MainThread:64398 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2025-12-13 00:32:35,680 INFO    MainThread:64398 [wandb_init.py:init():1041] starting run threads in backend
+2025-12-13 00:32:35,735 INFO    MainThread:64398 [wandb_run.py:_console_start():2521] atexit reg
+2025-12-13 00:32:35,736 INFO    MainThread:64398 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2025-12-13 00:32:35,736 INFO    MainThread:64398 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2025-12-13 00:32:35,736 INFO    MainThread:64398 [wandb_run.py:_redirect():2461] Redirects installed.
+2025-12-13 00:32:35,736 INFO    MainThread:64398 [wandb_init.py:init():1081] run started, returning control to user process

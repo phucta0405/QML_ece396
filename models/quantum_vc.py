@@ -43,18 +43,26 @@ def vqc_state(x, params, n_layers):
     return Statevector.from_label("0" * n_qubits).evolve(qc)
 
 # prediction: expectation value of Z on qubit 0
-def vqc_predict_prob(x, params):
-    # input number of layers here
-    sv = vqc_state(x, params, 2)
-    # <Z> = |0|^2 - |1|^2
+def vqc_predict_prob(x, params, n_layers=2):
+    sv = vqc_state(x, params, n_layers)
     p0 = np.abs(sv.data[0]) ** 2
     p1 = np.abs(sv.data[1]) ** 2
     return (p0 - p1 + 1) / 2  # map [-1,1] → [0,1]
 
+# batch prediction
+def vqc_predict_prob_batch(X, params, n_layers=2):
+    # Vectorized batch prediction for X (shape: [num_samples, n_qubits])
+    results = []
+    for x in X:
+        sv = vqc_state(x, params, n_layers)
+        p0 = np.abs(sv.data[0]) ** 2
+        p1 = np.abs(sv.data[1]) ** 2
+        results.append((p0 - p1 + 1) / 2)
+    return np.array(results)
 
-# loss function
-def loss_fn(params, X, Y):
-    preds = np.array([vqc_predict_prob(x, params) for x in X])
+# loss function (vectorized)
+def loss_fn(params, X, Y, n_layers=2):
+    preds = vqc_predict_prob_batch(X, params, n_layers)
     eps = 1e-10
     return -np.mean(Y * np.log(preds + eps) + (1 - Y) * np.log(1 - preds + eps))
 
@@ -62,24 +70,20 @@ def loss_fn(params, X, Y):
 @dataclass
 class VQCModel:
     params: np.ndarray
+    n_layers: int = 2
 
-
-def train_vqc(X, Y):
+def train_vqc(X, Y, n_layers=2, maxiter=40):
     n_qubits = X.shape[1]
-    n_params = 2 * n_qubits   # two-layer ansatz
-
-    # initialize params randomly
+    n_params = n_layers * n_qubits
     init_params = np.random.uniform(0, 2*np.pi, n_params)
-
     result = minimize(
-        loss_fn, init_params, args=(X, Y),
-        method="COBYLA",
-        options={"maxiter": 80}
+        loss_fn, init_params, args=(X, Y, n_layers),
+        method="L-BFGS-B",
+        options={"maxiter": maxiter}
     )
-
-    return VQCModel(params=result.x)
+    return VQCModel(params=result.x, n_layers=n_layers)
 
 # prediction
 def predict_vqc(model, X):
-    preds = np.array([vqc_predict_prob(x, model.params) for x in X])
+    preds = vqc_predict_prob_batch(X, model.params, model.n_layers)
     return (preds > 0.5).astype(int)

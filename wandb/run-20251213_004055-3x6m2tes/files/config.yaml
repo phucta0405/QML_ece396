@@ -1,0 +1,70 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            yf1gqir8c8imtspowd52fj2uibwzjxdv:
+                apple:
+                    ecpuCores: 4
+                    gpuCores: 10
+                    memoryGb: 16
+                    name: Apple M3
+                    pcpuCores: 4
+                    ramTotalBytes: "17179869184"
+                    swapTotalBytes: "15032385536"
+                codePath: train_wandb.py
+                codePathLocal: train_wandb.py
+                cpu_count: 8
+                cpu_count_logical: 8
+                disk:
+                    /:
+                        total: "494384795648"
+                        used: "189527719936"
+                email: st0490@princeton.edu
+                executable: /Users/phucta/envs/cos461/bin/python3
+                git:
+                    commit: dc3e4f5d5722dcc3ca364f9a5a4d676382bc4ddf
+                    remote: https://github.com/phucta0405/QML_ece396.git
+                host: dynamic-oit-ip4-wifirestricted03-10-48-140-7.princeton.edu
+                memory:
+                    total: "17179869184"
+                os: macOS-15.5-arm64-arm-64bit
+                program: /Users/phucta/QML_ece396/train_wandb.py
+                python: CPython 3.11.14
+                root: /Users/phucta/QML_ece396
+                startedAt: "2025-12-13T05:40:55.139298Z"
+                writerId: yf1gqir8c8imtspowd52fj2uibwzjxdv
+        m: []
+        python_version: 3.11.14
+        t:
+            "1":
+                - 1
+                - 5
+                - 53
+            "2":
+                - 1
+                - 5
+                - 53
+            "3":
+                - 2
+                - 13
+                - 16
+            "4": 3.11.14
+            "5": 0.23.1
+            "10":
+                - 20
+            "12": 0.23.1
+            "13": darwin-arm64
+max_dim:
+    value: 20
+min_dim:
+    value: 2
+model:
+    value: transformer
+n_runs:
+    value: 3
+num_samples:
+    value: 10000
+step:
+    value: 1
+sweep_type:
+    value: spiral_dim

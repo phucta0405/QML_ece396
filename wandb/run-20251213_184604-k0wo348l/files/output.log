@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 339, in <module>
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 222, in sweep_spiral_dim
+    clf = fit_fn(X_train, y_train)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 99, in train_vqc
+    result = minimize(
+             ^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_minimize.py", line 784, in minimize
+    res = _minimize_lbfgsb(fun, x0, args, jac, bounds,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_lbfgsb_py.py", line 413, in _minimize_lbfgsb
+    sf = _prepare_scalar_function(fun, x0, jac=jac, args=args, epsilon=eps,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_optimize.py", line 310, in _prepare_scalar_function
+    sf = ScalarFunction(fun, x0, args, grad, hess,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 274, in __init__
+    self._update_fun()
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 353, in _update_fun
+    fx = self._wrapped_fun(self.x)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/_util.py", line 590, in __call__
+    fx = self.f(np.copy(x), *self.args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 85, in loss_fn
+    preds = vqc_predict_prob_batch(X, params, n_layers)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 75, in vqc_predict_prob_batch
+    p0 = np.real(reduced[0, 0])
+                 ~~~~~~~^^^^^^
+TypeError: 'DensityMatrix' object is not subscriptable

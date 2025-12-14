@@ -9,7 +9,8 @@ from models.classical_svm import fit_svm_classifier, predict_svm_classifier
 from models.feed_forward_net import fit_feedforward_classifier, predict_feedforward_classifier
 from models.transformer import fit_transformer_classifier, predict_transformer_classifier
 from models.quantum_kernel import fit_quantumkernel_classifier, predict_quantumkernel_classifier
-
+from models.quantum_vc import train_vqc, predict_vqc  
+from quantum_vc1 import train_vqc1, predict_vqc1
 number_of_samples = 1000
 
 """
@@ -29,8 +30,8 @@ DATASET_LOADERS = {
     'bas': get_bas_example,
     'nsphere': lambda: nsphere_sample(number_of_samples, ndim=2),
     'circles': lambda: None,  # sphere but 2 dimensions
-    'spiral': lambda: Spiral_sample(dW=0.1, Ns=number_of_samples),
-    'spiral2': lambda: Spiral_sample2(dW=0.1, Ns=number_of_samples),
+    'spiral': lambda: Spiral_sample(dW=0.75, Ns=number_of_samples),
+    'spiral2': lambda: Spiral_sample2(dW=0.75, Ns=number_of_samples),
 }
 
 MODELS = {
@@ -38,6 +39,8 @@ MODELS = {
     "feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
     'transformer': (fit_transformer_classifier, predict_transformer_classifier),
     'quantum_kernel': (fit_quantumkernel_classifier, predict_quantumkernel_classifier),
+    'quantum_vc': (train_vqc, predict_vqc), 
+    'quantum_vc1': (train_vqc1, predict_vqc1),
 }
 
 def train_and_test(dataset: str, model: str):
@@ -176,6 +179,143 @@ def train_and_test(dataset: str, model: str):
     # Finish wandb run
     wandb.finish()
 
+def sweep_spiral_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n_runs=3):
+    """
+    For each model, test on spiral dataset with increasing dimension and log to wandb.
+    Log a single plot with all models' accuracy curves.
+    """
+    all_mean_accs = {}
+    dims = list(range(min_dim, max_dim+1, step))
+    for model in models:
+        wandb.init(
+            project="qml-classification",
+            config={
+                "sweep_type": "spiral_dim",
+                "model": model,
+                "min_dim": min_dim,
+                "max_dim": max_dim,
+                "step": step,
+                "num_samples": num_samples,
+                "n_runs": n_runs,
+            },
+            name=f"sweep_{model}_spiral_dim",
+            reinit=True
+        )
+        fit_fn, predict_fn = MODELS[model]
+        mean_accs = []
+        std_accs = []
+        for d in dims:
+            accs = []
+            for run in range(n_runs):
+                # Generate spiral data in d dimensions
+                # For d>2, stack 2D spiral with random noise in extra dims
+                x_spiral2d = Spiral_sample(0.75, num_samples, ts=0, Nturns=3, Sep=0.05, seed=42+run).T
+                if d > 2:
+                    extra = np.random.randn(num_samples, d-2)
+                    x_spiral = np.concatenate([x_spiral2d, extra], axis=1)
+                else:
+                    x_spiral = x_spiral2d
+                # Labels: 0 for first half, 1 for second half
+                y_spiral = np.dstack((np.zeros(num_samples//2), np.ones(num_samples//2))).flatten().astype(int)
+                X_train, X_test, y_train, y_test = train_test_split(x_spiral, y_spiral, test_size=0.25, random_state=42+run, stratify=y_spiral)
+                clf = fit_fn(X_train, y_train)
+                y_pred = predict_fn(clf, X_test)
+                acc = np.mean(y_pred == y_test)
+                accs.append(acc)
+            mean_acc = np.mean(accs)
+            std_acc = np.std(accs)
+            mean_accs.append(mean_acc)
+            std_accs.append(std_acc)
+            wandb.log({
+                f"{model}_dim": d,
+                f"{model}_mean_accuracy": mean_acc,
+                f"{model}_std_accuracy": std_acc
+            })
+        all_mean_accs[model] = mean_accs
+        wandb.finish()
+    # Log a single plot with all models' accuracy curves
+    wandb.init(project="qml-classification_spiral_noise", name="spiral_dim_all_models_plot", reinit=True)
+    ys = [all_mean_accs[m] for m in models]
+    keys = [f"{m} mean accuracy" for m in models]
+    wandb.log({
+        "all_models_acc_vs_dim": wandb.plot.line_series(
+            xs=dims,
+            ys=ys,
+            keys=keys,
+            title="All Models: Accuracy vs. Dimension (Spiral Dataset)",
+            xname="dimension"
+        )
+    })
+    wandb.finish()
+
+def sweep_nsphere_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n_runs=3):
+    """
+    For each model, test on nsphere dataset with increasing dimension and log to wandb.
+    Log a single plot with all models' accuracy curves.
+    """
+    all_mean_accs = {}
+    dims = list(range(min_dim, max_dim+1, step))
+    for model in models:
+        wandb.init(
+            project="qml-classification",
+            config={
+                "sweep_type": "nsphere_dim",
+                "model": model,
+                "min_dim": min_dim,
+                "max_dim": max_dim,
+                "step": step,
+                "num_samples": num_samples,
+                "n_runs": n_runs,
+            },
+            name=f"sweep_{model}_nsphere_dim",
+            reinit=True
+        )
+        fit_fn, predict_fn = MODELS[model]
+        mean_accs = []
+        std_accs = []
+        for d in dims:
+            accs = []
+            for run in range(n_runs):
+                # Generate nsphere data in d dimensions
+                r1, r0 = 1, 0.5
+                dr = 0.2
+                r_mid = (r1 + r0) / 2
+                x_sphere1 = r1 * Noisy_nsphere_sample(dr / r1, int(num_samples / 2), ndim=d).T
+                x_sphere0 = r0 * Noisy_nsphere_sample(dr / r0, int(num_samples / 2), ndim=d).T
+                x_sphere = np.vstack([x_sphere1, x_sphere0])
+                rad_sphere = np.sqrt(np.sum(x_sphere ** 2, axis=1))
+                Y_sphere = (rad_sphere > r_mid).astype(int)
+                X_train, X_test, y_train, y_test = train_test_split(x_sphere, Y_sphere, test_size=0.25, random_state=42+run, stratify=Y_sphere)
+                clf = fit_fn(X_train, y_train)
+                y_pred = predict_fn(clf, X_test)
+                acc = np.mean(y_pred == y_test)
+                accs.append(acc)
+            mean_acc = np.mean(accs)
+            std_acc = np.std(accs)
+            mean_accs.append(mean_acc)
+            std_accs.append(std_acc)
+            wandb.log({
+                f"{model}_dim": d,
+                f"{model}_mean_accuracy": mean_acc,
+                f"{model}_std_accuracy": std_acc
+            })
+        all_mean_accs[model] = mean_accs
+        wandb.finish()
+    # Log a single plot with all models' accuracy curves
+    wandb.init(project="qml-classification-nsphere", name="nsphere_dim_all_models_plot", reinit=True)
+    ys = [all_mean_accs[m] for m in models]
+    keys = [f"{m} mean accuracy" for m in models]
+    wandb.log({
+        "all_models_acc_vs_dim_nsphere": wandb.plot.line_series(
+            xs=dims,
+            ys=ys,
+            keys=keys,
+            title="All Models: Accuracy vs. Dimension (n-Sphere Dataset)",
+            xname="dimension"
+        )
+    })
+    wandb.finish()
+
 def main():
     parser = argparse.ArgumentParser(description="Train and test SVM on basic datasets.")
     parser.add_argument('--dataset', type=str, default='bas', 
@@ -194,4 +334,5 @@ if __name__ == "__main__":
      Same with kernel choice for SVM in models/classical_svm.py, we can
      use 'rbf' kernel instead of 'linear' by default
     """
-    main()
+    # Example usage: sweep all models on spiral dataset with increasing dimension
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
