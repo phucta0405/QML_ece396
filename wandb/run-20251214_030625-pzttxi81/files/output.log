@@ -1,0 +1,146 @@
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 2, Qubits: 2, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.6978  acc=51.07%
+Epoch [20/50]  loss=0.6959  acc=50.00%
+Epoch [30/50]  loss=0.6949  acc=50.00%
+Epoch [40/50]  loss=0.6966  acc=50.00%
+Epoch [50/50]  loss=0.6960  acc=50.00%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 2, Qubits: 2, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.6863  acc=44.00%
+Epoch [20/50]  loss=0.6853  acc=50.00%
+Epoch [30/50]  loss=0.6985  acc=50.00%
+Epoch [40/50]  loss=0.6958  acc=50.00%
+Epoch [50/50]  loss=0.6961  acc=50.00%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 2, Qubits: 2, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.6584  acc=63.73%
+Epoch [20/50]  loss=0.6568  acc=64.53%
+Epoch [30/50]  loss=0.6961  acc=61.87%
+Epoch [40/50]  loss=0.6708  acc=58.27%
+Epoch [50/50]  loss=0.6636  acc=62.00%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 3, Qubits: 3, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.5228  acc=76.67%
+Epoch [20/50]  loss=0.6965  acc=51.87%
+Epoch [30/50]  loss=0.6500  acc=63.47%
+Epoch [40/50]  loss=0.6392  acc=74.53%
+Epoch [50/50]  loss=0.5012  acc=75.47%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 3, Qubits: 3, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.5726  acc=69.20%
+Epoch [20/50]  loss=0.5780  acc=68.93%
+Epoch [30/50]  loss=0.5793  acc=69.07%
+Epoch [40/50]  loss=0.5316  acc=73.60%
+Epoch [50/50]  loss=0.5433  acc=74.53%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 3, Qubits: 3, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.6491  acc=60.27%
+Epoch [20/50]  loss=0.6945  acc=50.80%
+Epoch [30/50]  loss=0.6721  acc=56.40%
+Epoch [40/50]  loss=0.6969  acc=50.00%
+Epoch [50/50]  loss=0.6957  acc=50.00%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 4, Qubits: 4, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.6372  acc=65.73%
+Epoch [20/50]  loss=0.6525  acc=62.00%
+Epoch [30/50]  loss=0.6384  acc=63.87%
+Epoch [40/50]  loss=0.6182  acc=67.33%
+Epoch [50/50]  loss=0.5436  acc=73.73%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 4, Qubits: 4, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.6909  acc=53.87%
+Epoch [20/50]  loss=0.6858  acc=57.07%
+Epoch [30/50]  loss=0.6895  acc=67.20%
+Epoch [40/50]  loss=0.6383  acc=71.20%
+Epoch [50/50]  loss=0.6171  acc=71.73%
+Training complete!
+Training Hybrid QNN (Improved Encoding):
+  Device: cpu, Aer GPU: False
+  Input: 4, Qubits: 4, Layers: 2
+  Encoding: zz_hybrid, Data re-upload: True
+  Learnable scaling: True
+  Epochs: 50, Batch: 8, LR: 0.01
+Epoch [10/50]  loss=0.5904  acc=71.60%
+Epoch [20/50]  loss=0.6068  acc=69.47%
+Epoch [30/50]  loss=0.5640  acc=75.33%
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 344, in <module>
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 294, in sweep_nsphere_dim
+    accs.append(acc)
+          ^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 560, in fit_hybrid_qnn_classifier
+    loss.backward()
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_tensor.py", line 625, in backward
+    torch.autograd.backward(
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/autograd/__init__.py", line 354, in backward
+    _engine_run_backward(
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/autograd/graph.py", line 841, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/autograd/function.py", line 315, in apply
+    return user_fn(self, *args)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 368, in backward
+    layer._compute_parameter_shift_gradients(
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 282, in _compute_parameter_shift_gradients
+    out_minus = self._batch_forward(x_batch, theta_np, gamma_minus,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 245, in _batch_forward
+    return self._batch_run_circuits(x_batch, theta_batch, gamma_batch,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 227, in _batch_run_circuits
+    circuits.append(self.qc.assign_parameters(param_dict))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/circuit/quantumcircuit.py", line 4957, in assign_parameters
+    extras := [
+              ^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/circuit/quantumcircuit.py", line 4958, in <listcomp>
+    parameter for parameter in raw_mapping if not self.has_parameter(parameter)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/circuit/quantumcircuit.py", line 3029, in has_parameter
+    and self.get_parameter(name_or_param.name, None) == name_or_param
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/circuit/quantumcircuit.py", line 3001, in get_parameter
+    if (parameter := self._data.get_parameter_by_name(name)) is None:
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

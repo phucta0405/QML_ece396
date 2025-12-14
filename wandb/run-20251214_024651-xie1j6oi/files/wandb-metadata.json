@@ -1,0 +1,17 @@
+{
+  "os": "macOS-15.5-arm64-arm-64bit",
+  "python": "CPython 3.11.14",
+  "startedAt": "2025-12-14T07:46:51.152421Z",
+  "program": "/Users/phucta/QML_ece396/train_wandb.py",
+  "codePath": "train_wandb.py",
+  "codePathLocal": "train_wandb.py",
+  "git": {
+    "remote": "https://github.com/phucta0405/QML_ece396.git",
+    "commit": "b2a0be113392ebf94738c0bd0c19bd1c5ad269f6"
+  },
+  "email": "st0490@princeton.edu",
+  "root": "/Users/phucta/QML_ece396",
+  "host": "dynamic-oit-ip4-wifirestricted03-10-48-140-7.princeton.edu",
+  "executable": "/Users/phucta/envs/cos461/bin/python3",
+  "writerId": "beaaidna3xc1ew4ridtn4fh22tu1235k"
+}

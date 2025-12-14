@@ -1,0 +1,81 @@
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 342, in <module>
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 223, in sweep_spiral_dim
+    clf = fit_fn(X_train, y_train)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/feed_forward_net.py", line 38, in fit_feedforward_classifier
+    optimizer = optim.Adam(model.parameters(), lr=lr)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/optim/adam.py", line 101, in __init__
+    super().__init__(params, defaults)
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/optim/optimizer.py", line 401, in __init__
+    self.add_param_group(cast(dict, param_group))
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_compile.py", line 46, in inner
+    import torch._dynamo
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/__init__.py", line 13, in <module>
+    from . import (
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/aot_compile.py", line 15, in <module>
+    from . import convert_frame
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/convert_frame.py", line 57, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/symbolic_convert.py", line 59, in <module>
+    from . import (
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/trace_rules.py", line 58, in <module>
+    from .variables import (
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/variables/__init__.py", line 19, in <module>
+    from .base import VariableTracker
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/variables/base.py", line 650, in <module>
+    from . import builder
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/variables/builder.py", line 94, in <module>
+    from ..side_effects import SideEffects
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/side_effects.py", line 34, in <module>
+    from torch._dynamo.variables.misc import AutogradFunctionContextVariable
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/variables/misc.py", line 61, in <module>
+    from .functions import NestedUserFunctionVariable, UserFunctionVariable
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_dynamo/variables/functions.py", line 88, in <module>
+    from torch.distributed.fsdp._fully_shard import _fsdp_param_group
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/fsdp/__init__.py", line 1, in <module>
+    from ._flat_param import FlatParameter as FlatParameter
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/fsdp/_flat_param.py", line 33, in <module>
+    from ._fsdp_extensions import (
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/fsdp/_fsdp_extensions.py", line 8, in <module>
+    from torch.distributed.fsdp._shard_utils import (
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/fsdp/_shard_utils.py", line 18, in <module>
+    from torch.distributed.tensor import DeviceMesh, DTensor, Replicate, Shard as DShard
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/tensor/__init__.py", line 4, in <module>
+    import torch.distributed.tensor._ops  # force import all built-in dtensor ops
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/tensor/_ops/__init__.py", line 2, in <module>
+    from ._conv_ops import *  # noqa: F403
+    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/tensor/_ops/_conv_ops.py", line 5, in <module>
+    from torch.distributed.tensor._dtensor_spec import DTensorSpec, TensorMeta
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/tensor/_dtensor_spec.py", line 6, in <module>
+    from torch.distributed.tensor.placement_types import (
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/tensor/placement_types.py", line 10, in <module>
+    from torch.distributed.tensor._collective_utils import (
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/distributed/tensor/_collective_utils.py", line 28, in <module>
+    @torch.library.register_fake("_dtensor::shard_dim_alltoall")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/library.py", line 1063, in register
+    use_lib._register_fake(
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/library.py", line 190, in _register_fake
+    source = torch._library.utils.get_source(_stacklevel + 1)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/_library/utils.py", line 44, in get_source
+    frame = inspect.getframeinfo(sys._getframe(stacklevel))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.14_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/inspect.py", line 1688, in getframeinfo
+    lines, lnum = findsource(frame)
+                  ^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.14_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/inspect.py", line 1071, in findsource
+    module = getmodule(object, file)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.14_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/inspect.py", line 997, in getmodule
+    os.path.realpath(f)] = module.__name__
+    ^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 416, in realpath
+  File "<frozen posixpath>", line 458, in _joinrealpath
+  File "<frozen posixpath>", line 71, in join
+KeyboardInterrupt

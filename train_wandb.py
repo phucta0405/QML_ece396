@@ -11,6 +11,7 @@ from models.transformer import fit_transformer_classifier, predict_transformer_c
 from models.quantum_kernel import fit_quantumkernel_classifier, predict_quantumkernel_classifier
 from models.quantum_vc import train_vqc, predict_vqc  
 from quantum_vc1 import train_vqc1, predict_vqc1
+from models.quantum_hybrid import fit_hybrid_qnn_classifier, predict_hybrid_qnn_classifier
 number_of_samples = 1000
 
 """
@@ -39,8 +40,9 @@ MODELS = {
     "feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
     'transformer': (fit_transformer_classifier, predict_transformer_classifier),
     'quantum_kernel': (fit_quantumkernel_classifier, predict_quantumkernel_classifier),
-    'quantum_vc': (train_vqc, predict_vqc), 
     'quantum_vc1': (train_vqc1, predict_vqc1),
+    'hybrid_qnn': (fit_hybrid_qnn_classifier, predict_hybrid_qnn_classifier),
+    'quantum_vc': (train_vqc, predict_vqc), 
 }
 
 def train_and_test(dataset: str, model: str):
@@ -50,7 +52,7 @@ def train_and_test(dataset: str, model: str):
 
     # Initialize wandb
     wandb.init(
-        project="qml-classifications",
+        project="qml-classification",
         config={
             "dataset": dataset,
             "model": model,
@@ -60,7 +62,7 @@ def train_and_test(dataset: str, model: str):
     )
 
     fit_fn, predict_fn = MODELS[model]
-    n_runs = 5
+    n_runs = 1
     accs = []
     for run in range(n_runs):
         if dataset == 'bas':
@@ -321,7 +323,7 @@ def main():
     parser.add_argument('--dataset', type=str, default='bas', 
                         choices=['bas', 'nsphere', 'spiral', 'spiral2', 'circles'], help='Dataset to use')
     parser.add_argument('--model', type=str, default='classical_svm', 
-                        choices=['classical_svm', 'feedforward', 'transformer', 'quantum_kernel'], 
+                        choices=['classical_svm', 'feedforward', 'transformer', 'quantum_kernel', 'quantum_vc1'], 
                         help='Model to use')
     args = parser.parse_args()
     train_and_test(args.dataset, args.model)
