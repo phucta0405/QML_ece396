@@ -1,0 +1,37 @@
+{
+  "os": "macOS-15.5-arm64-arm-64bit",
+  "python": "CPython 3.11.14",
+  "startedAt": "2025-12-15T20:09:55.217136Z",
+  "program": "/Users/phucta/QML_ece396/train_wandb.py",
+  "codePath": "train_wandb.py",
+  "codePathLocal": "train_wandb.py",
+  "git": {
+    "remote": "https://github.com/phucta0405/QML_ece396.git",
+    "commit": "ed9c32c92b1810332c82b493f2916ea3f127adcf"
+  },
+  "email": "st0490@princeton.edu",
+  "root": "/Users/phucta/QML_ece396",
+  "host": "dynamic-oit-ip4-wifirestricted03-10-48-140-7.princeton.edu",
+  "executable": "/Users/phucta/envs/cos461/bin/python3",
+  "cpu_count": 8,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "494384795648",
+      "used": "184663318528"
+    }
+  },
+  "memory": {
+    "total": "17179869184"
+  },
+  "apple": {
+    "name": "Apple M3",
+    "ecpuCores": 4,
+    "pcpuCores": 4,
+    "gpuCores": 10,
+    "memoryGb": 16,
+    "swapTotalBytes": "11811160064",
+    "ramTotalBytes": "17179869184"
+  },
+  "writerId": "bf2iout5ildo2zcxo9m7ij21nu6o2jjm"
+}

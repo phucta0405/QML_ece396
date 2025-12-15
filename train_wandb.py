@@ -38,10 +38,10 @@ DATASET_LOADERS = {
 MODELS = {
     #'classical_svm': (fit_svm_classifier, predict_svm_classifier),
     #"feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
-    #'transformer': (fit_transformer_classifier, predict_transformer_classifier),
+    'transformer': (fit_transformer_classifier, predict_transformer_classifier),
     #'quantum_kernel': (fit_quantumkernel_classifier, predict_quantumkernel_classifier),
     #'quantum_vc1': (train_vqc1, predict_vqc1),
-    'hybrid_qnn': (fit_hybrid_qnn_classifier, predict_hybrid_qnn_classifier),
+    #'hybrid_qnn': (fit_hybrid_qnn_classifier, predict_hybrid_qnn_classifier),
     #'quantum_vc': (train_vqc, predict_vqc), 
 }
 
@@ -345,4 +345,4 @@ if __name__ == "__main__":
      use 'rbf' kernel instead of 'linear' by default
     """
     # Example usage: sweep all models on spiral dataset with increasing dimension
-    sweep_nsphere_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=1)
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=1)

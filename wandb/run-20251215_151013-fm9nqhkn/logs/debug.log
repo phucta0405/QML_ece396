@@ -1,0 +1,22 @@
+2025-12-15 15:10:13,126 INFO    MainThread:40529 [wandb_init.py:setup_run_log_directory():714] Logging user logs to /Users/phucta/QML_ece396/wandb/run-20251215_151013-fm9nqhkn/logs/debug.log
+2025-12-15 15:10:13,127 INFO    MainThread:40529 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to /Users/phucta/QML_ece396/wandb/run-20251215_151013-fm9nqhkn/logs/debug-internal.log
+2025-12-15 15:10:13,127 INFO    MainThread:40529 [wandb_init.py:init():841] calling init triggers
+2025-12-15 15:10:13,127 INFO    MainThread:40529 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-12-15 15:10:13,127 INFO    MainThread:40529 [wandb_init.py:init():889] starting backend
+2025-12-15 15:10:13,127 INFO    MainThread:40529 [wandb_init.py:init():892] sending inform_init request
+2025-12-15 15:10:13,128 INFO    MainThread:40529 [wandb_init.py:init():900] backend started and connected
+2025-12-15 15:10:13,128 INFO    MainThread:40529 [wandb_init.py:init():970] updated telemetry
+2025-12-15 15:10:13,165 INFO    MainThread:40529 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2025-12-15 15:10:13,490 INFO    MainThread:40529 [wandb_init.py:init():1041] starting run threads in backend
+2025-12-15 15:10:13,624 INFO    MainThread:40529 [wandb_run.py:_console_start():2521] atexit reg
+2025-12-15 15:10:13,624 INFO    MainThread:40529 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2025-12-15 15:10:13,625 INFO    MainThread:40529 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2025-12-15 15:10:13,625 INFO    MainThread:40529 [wandb_run.py:_redirect():2461] Redirects installed.
+2025-12-15 15:10:13,626 INFO    MainThread:40529 [wandb_init.py:init():1081] run started, returning control to user process
+2025-12-15 15:10:13,628 INFO    MainThread:40529 [wandb_run.py:_config_callback():1396] config_cb ('_wandb', 'visualize', 'all_models_acc_vs_dim') {'panel_type': 'Vega2', 'panel_config': {'panelDefId': 'wandb/lineseries/v0', 'fieldSettings': {'step': 'step', 'lineKey': 'lineKey', 'lineVal': 'lineVal'}, 'stringSettings': {'title': 'All Models: Accuracy vs. Dimension (Spiral Dataset)', 'xname': 'dimension'}, 'transform': {'name': 'tableWithLeafColNames'}, 'userQuery': {'queryFields': [{'name': 'runSets', 'args': [{'name': 'runSets', 'value': '${runSets}'}], 'fields': [{'name': 'id', 'fields': []}, {'name': 'name', 'fields': []}, {'name': '_defaultColorIndex', 'fields': []}, {'name': 'summaryTable', 'args': [{'name': 'tableKey', 'value': 'all_models_acc_vs_dim_table'}], 'fields': []}]}]}}} None
+2025-12-15 15:10:14,644 INFO    MainThread:40529 [wandb_run.py:_finish():2287] finishing run quanntum_ml/qml-classification_spiral_noise/fm9nqhkn
+2025-12-15 15:10:14,645 INFO    MainThread:40529 [wandb_run.py:_atexit_cleanup():2486] got exitcode: 0
+2025-12-15 15:10:14,645 INFO    MainThread:40529 [wandb_run.py:_restore():2468] restore
+2025-12-15 15:10:14,645 INFO    MainThread:40529 [wandb_run.py:_restore():2474] restore done
+2025-12-15 15:10:15,673 INFO    MainThread:40529 [wandb_run.py:_footer_sync_info():3862] logging synced files
