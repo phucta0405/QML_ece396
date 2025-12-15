@@ -3,28 +3,57 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+import torch
+import torch.nn as nn
+
 class TransformerClassifier(nn.Module):
-    def __init__(self, input_dim, num_classes=2, d_model=4, nhead=2, num_layers=2, dim_feedforward=8, dropout=0.1):
+    def __init__(self, input_dim, num_classes=2, d_model=1, nhead=2,
+                 num_layers=1, dim_feedforward=2, dropout=0, use_cls=True):
         super().__init__()
-        self.input_proj = nn.Linear(input_dim, d_model)
-        encoder_layer = nn.TransformerEncoderLayer(d_model=d_model, nhead=nhead, dim_feedforward=dim_feedforward, dropout=dropout, batch_first=True)
-        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+        self.input_dim = input_dim
+        self.use_cls = use_cls
+
+        self.token_proj = nn.Linear(1, d_model)
+        self.pos_embed = nn.Parameter(torch.zeros(1, input_dim + (1 if use_cls else 0), d_model))
+
+        if use_cls:
+            self.cls_token = nn.Parameter(torch.zeros(1, 1, d_model))
+
+        enc_layer = nn.TransformerEncoderLayer(
+            d_model=d_model, nhead=nhead, dim_feedforward=dim_feedforward,
+            dropout=dropout, batch_first=True
+        )
+        self.encoder = nn.TransformerEncoder(enc_layer, num_layers=num_layers)
         self.classifier = nn.Linear(d_model, num_classes)
 
     def forward(self, x):
-        x = self.input_proj(x)
-        x = x.unsqueeze(1)
-        x = self.transformer_encoder(x)
-        x = x.squeeze(1)
-        return self.classifier(x)
+        x = x.unsqueeze(-1)
+        x = self.token_proj(x) 
+
+        if self.use_cls:
+            B = x.size(0)
+            cls = self.cls_token.expand(B, -1, -1) 
+            x = torch.cat([cls, x], dim=1)         
+
+        x = x + self.pos_embed[:, :x.size(1), :]
+        x = self.encoder(x)
+
+        # pool
+        if self.use_cls:
+            h = x[:, 0, :]           # CLS token
+        else:
+            h = x.mean(dim=1)        # mean pool over feature tokens
+
+        return self.classifier(h)
 
 
-def fit_transformer_classifier(X: np.ndarray, Y: np.ndarray, num_classes=2, d_model=4, nhead=2, num_layers=2, dim_feedforward=8, dropout=0.1, epochs=100, lr=0.01, verbose=False) -> TransformerClassifier:
+
+def fit_transformer_classifier(X: np.ndarray, Y: np.ndarray, num_classes=2, d_model=2, nhead=2, num_layers=1, dim_feedforward=8, dropout=0.1, epochs=100, lr=0.001, verbose=False, use_cls=True) -> TransformerClassifier:
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     X_tensor = torch.tensor(X, dtype=torch.float32).to(device)
     Y_tensor = torch.tensor(Y, dtype=torch.long).to(device)
     input_dim = X.shape[1]
-    model = TransformerClassifier(input_dim, num_classes, d_model, nhead, num_layers, dim_feedforward, dropout).to(device)
+    model = TransformerClassifier(input_dim, num_classes, d_model, nhead, num_layers, dim_feedforward, dropout, use_cls).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
     for epoch in range(epochs):

@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 271, in <module>
+    config={
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 222, in sweep_spiral_dim
+    x_spiral = np.dstack((x_spiral1.T, x_spiral0.T)).reshape(D_spiral, N_spiral).T
+      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc.py", line 74, in train_vqc
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_minimize.py", line 790, in minimize
+    res = _minimize_cobyla(fun, x0, args, constraints, callback=callback,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_cobyla_py.py", line 278, in _minimize_cobyla
+    result = minimize(sf.fun, x0, method='cobyla', bounds=bounds,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/pyprima/__init__.py", line 191, in minimize
+    result = cobyla(
+             ^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/pyprima/cobyla/cobyla.py", line 461, in cobyla
+    x, f, constr, cstrv, nf, xhist, fhist, chist, conhist, info = cobylb(
+                                                                  ^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/pyprima/cobyla/cobylb.py", line 93, in cobylb
+    evaluated, conmat, cval, sim, simi, fval, nf, subinfo = initxfc(calcfc, iprint,
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/pyprima/cobyla/initialize.py", line 87, in initxfc
+    f, constr = evaluate(calcfc, x, m_nlcon, amat, bvec)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/pyprima/common/evaluate.py", line 80, in evaluate
+    f, constr[m_lcon:] = calcfc(moderatex(x))
+                         ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/pyprima/__init__.py", line 178, in calcfc
+    f = fun(x, *args)
+        ^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 385, in fun
+    self._update_fun()
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 353, in _update_fun
+    fx = self._wrapped_fun(self.x)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/_util.py", line 590, in __call__
+    fx = self.f(np.copy(x), *self.args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc.py", line 57, in loss_fn
+    sv = vqc_state(x, params, n_layers)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc.py", line 57, in <listcomp>
+    sv = vqc_state(x, params, n_layers)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc.py", line 48, in vqc_predict_prob
+    p0 = np.abs(sv.data[0]) ** 2
+         ~~~~~~~~~~~~~~~~~~~^^~~
+  File "/Users/phucta/QML_ece396/models/quantum_vc.py", line 43, in vqc_state
+    return Statevector.from_label("0" * n_qubits).evolve(qc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 400, in evolve
+    return self._evolve_instruction(ret, other, qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 976, in _evolve_instruction
+    Statevector._evolve_instruction(statevec, instruction.operation, qargs=new_qargs)
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 918, in _evolve_instruction
+    return Statevector._evolve_operator(statevec, Operator(mat), qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 891, in _evolve_operator
+    np.dot(oper.data, np.reshape(tensor, contract_shape)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
