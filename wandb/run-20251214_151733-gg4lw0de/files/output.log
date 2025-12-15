@@ -1,0 +1,73 @@
+Using CPU for training (PennyLane backend: lightning.qubit)
+Epoch 1/50  loss=0.8634  acc=0.5040
+Epoch 2/50  loss=0.8139  acc=0.5160
+Epoch 3/50  loss=0.7694  acc=0.5253
+Epoch 4/50  loss=0.7331  acc=0.5427
+Epoch 5/50  loss=0.7157  acc=0.5400
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 340, in <module>
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 223, in sweep_spiral_dim
+    clf = fit_fn(X_train, y_train)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 425, in fit_hybrid_qnn_classifier
+    logits = model(xb)
+             ^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 328, in forward
+    z = self.quantum(x)
+        ^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 244, in forward
+    z_sample = self.qnode(x_sample, rot_cpu, ent_cpu, bias_cpu)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/qnode.py", line 895, in __call__
+    return self._impl_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/qnode.py", line 868, in _impl_call
+    res = execute(
+          ^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/execution.py", line 238, in execute
+    results = run(tapes, device, config, inner_transform)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/run.py", line 345, in run
+    results = ml_execute(tapes, execute_fn, jpc, device=device)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 236, in execute
+    return ExecuteTapes.apply(kwargs, *parameters)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 89, in new_apply
+    flat_out = orig_apply(out_struct_holder, *inp)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/autograd/function.py", line 581, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 93, in new_forward
+    out = orig_fw(ctx, *inp)
+          ^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 167, in forward
+    res = tuple(_res_to_torch(r, ctx) for r in res)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 167, in <genexpr>
+    res = tuple(_res_to_torch(r, ctx) for r in res)
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 244, in _res_to_torch
+    return type(r)(_res_to_torch(t, ctx) for t in r)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 244, in <genexpr>
+    return type(r)(_res_to_torch(t, ctx) for t in r)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 245, in _res_to_torch
+    return torch.as_tensor(r, device=ctx.torch_device)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

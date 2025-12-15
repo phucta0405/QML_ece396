@@ -36,13 +36,13 @@ DATASET_LOADERS = {
 }
 
 MODELS = {
-    'classical_svm': (fit_svm_classifier, predict_svm_classifier),
-    "feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
-    'transformer': (fit_transformer_classifier, predict_transformer_classifier),
-    'quantum_kernel': (fit_quantumkernel_classifier, predict_quantumkernel_classifier),
-    'quantum_vc1': (train_vqc1, predict_vqc1),
+    #'classical_svm': (fit_svm_classifier, predict_svm_classifier),
+    #"feedforward": (fit_feedforward_classifier, predict_feedforward_classifier),
+    #'transformer': (fit_transformer_classifier, predict_transformer_classifier),
+    #'quantum_kernel': (fit_quantumkernel_classifier, predict_quantumkernel_classifier),
+    #'quantum_vc1': (train_vqc1, predict_vqc1),
     'hybrid_qnn': (fit_hybrid_qnn_classifier, predict_hybrid_qnn_classifier),
-    'quantum_vc': (train_vqc, predict_vqc), 
+    #'quantum_vc': (train_vqc, predict_vqc), 
 }
 
 def train_and_test(dataset: str, model: str):
@@ -181,7 +181,7 @@ def train_and_test(dataset: str, model: str):
     # Finish wandb run
     wandb.finish()
 
-def sweep_spiral_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n_runs=3):
+def sweep_spiral_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n_runs=1):
     """
     For each model, test on spiral dataset with increasing dimension and log to wandb.
     Log a single plot with all models' accuracy curves.
@@ -209,16 +209,24 @@ def sweep_spiral_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n
         for d in dims:
             accs = []
             for run in range(n_runs):
-                # Generate spiral data in d dimensions
-                # For d>2, stack 2D spiral with random noise in extra dims
-                x_spiral2d = Spiral_sample(0.75, num_samples, ts=0, Nturns=3, Sep=0.05, seed=42+run).T
-                if d > 2:
+                if d == 2:
+                    # Match train.py spiral 
+                    D_spiral = 2
+                    N_spiral = num_samples
+                    cphase = [0, 1]
+                    Nturns = 4
+                    Sep = 0.05
+                    W = 0.5
+                    x_spiral0 = Spiral_sample2(W, int(N_spiral / 2), ts=cphase[0] * np.pi, Nturns=Nturns, Sep=Sep).T
+                    x_spiral1 = Spiral_sample2(W, int(N_spiral / 2), ts=cphase[1] * np.pi, Nturns=Nturns, Sep=Sep).T
+                    x_spiral = np.dstack((x_spiral1.T, x_spiral0.T)).reshape(D_spiral, N_spiral).T
+                    y_spiral = np.dstack((np.ones(int(N_spiral / 2)), np.zeros(int(N_spiral / 2)))).flatten().astype(int)
+                else:
+                    # For d>2, stack 2D spiral with random noise in extra dims
+                    x_spiral2d = Spiral_sample2(0.75, num_samples, ts=0, Nturns=4, Sep=0.05, seed=42+run).T
                     extra = np.random.randn(num_samples, d-2)
                     x_spiral = np.concatenate([x_spiral2d, extra], axis=1)
-                else:
-                    x_spiral = x_spiral2d
-                # Labels: 0 for first half, 1 for second half
-                y_spiral = np.dstack((np.zeros(num_samples//2), np.ones(num_samples//2))).flatten().astype(int)
+                    y_spiral = np.dstack((np.zeros(num_samples//2), np.ones(num_samples//2))).flatten().astype(int)
                 X_train, X_test, y_train, y_test = train_test_split(x_spiral, y_spiral, test_size=0.25, random_state=42+run, stratify=y_spiral)
                 clf = fit_fn(X_train, y_train)
                 y_pred = predict_fn(clf, X_test)
@@ -250,7 +258,7 @@ def sweep_spiral_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n
     })
     wandb.finish()
 
-def sweep_nsphere_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n_runs=3):
+def sweep_nsphere_dim(models, min_dim=2, max_dim=10, step=2, num_samples=10000, n_runs=1):
     """
     For each model, test on nsphere dataset with increasing dimension and log to wandb.
     Log a single plot with all models' accuracy curves.
@@ -337,4 +345,4 @@ if __name__ == "__main__":
      use 'rbf' kernel instead of 'linear' by default
     """
     # Example usage: sweep all models on spiral dataset with increasing dimension
-    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
+    sweep_nsphere_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=1)

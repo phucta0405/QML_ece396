@@ -1,0 +1,175 @@
+Epoch 1/50  loss=0.8634  acc=0.5040
+Epoch 2/50  loss=0.8139  acc=0.5160
+Epoch 3/50  loss=0.7694  acc=0.5253
+Epoch 4/50  loss=0.7331  acc=0.5427
+Epoch 5/50  loss=0.7157  acc=0.5400
+Epoch 6/50  loss=0.7059  acc=0.5213
+Epoch 7/50  loss=0.7021  acc=0.5267
+Epoch 8/50  loss=0.6983  acc=0.5253
+Epoch 9/50  loss=0.6977  acc=0.5213
+Epoch 10/50  loss=0.6964  acc=0.5200
+Epoch 11/50  loss=0.6958  acc=0.5200
+Epoch 12/50  loss=0.6941  acc=0.5187
+Epoch 13/50  loss=0.6935  acc=0.5147
+Epoch 14/50  loss=0.6931  acc=0.5173
+Epoch 15/50  loss=0.6931  acc=0.5213
+Epoch 16/50  loss=0.6926  acc=0.5267
+Epoch 17/50  loss=0.6926  acc=0.5187
+Epoch 18/50  loss=0.6923  acc=0.5160
+Epoch 19/50  loss=0.6921  acc=0.5227
+Epoch 20/50  loss=0.6921  acc=0.5227
+Epoch 21/50  loss=0.6919  acc=0.5227
+Epoch 22/50  loss=0.6916  acc=0.5227
+Epoch 23/50  loss=0.6919  acc=0.5227
+Epoch 24/50  loss=0.6915  acc=0.5240
+Epoch 25/50  loss=0.6914  acc=0.5227
+Epoch 26/50  loss=0.6914  acc=0.5267
+Epoch 27/50  loss=0.6912  acc=0.5253
+Epoch 28/50  loss=0.6913  acc=0.5227
+Epoch 29/50  loss=0.6915  acc=0.5253
+Epoch 30/50  loss=0.6917  acc=0.5227
+Epoch 31/50  loss=0.6914  acc=0.5253
+Epoch 32/50  loss=0.6914  acc=0.5200
+Epoch 33/50  loss=0.6910  acc=0.5200
+Epoch 34/50  loss=0.6910  acc=0.5227
+Epoch 35/50  loss=0.6914  acc=0.5267
+Epoch 36/50  loss=0.6911  acc=0.5253
+Epoch 37/50  loss=0.6909  acc=0.5227
+Epoch 38/50  loss=0.6911  acc=0.5227
+Epoch 39/50  loss=0.6907  acc=0.5227
+Epoch 40/50  loss=0.6911  acc=0.5240
+Epoch 41/50  loss=0.6916  acc=0.5227
+Epoch 42/50  loss=0.6910  acc=0.5187
+Epoch 43/50  loss=0.6910  acc=0.5240
+Epoch 44/50  loss=0.6910  acc=0.5200
+Epoch 45/50  loss=0.6909  acc=0.5200
+Epoch 46/50  loss=0.6910  acc=0.5187
+Epoch 47/50  loss=0.6911  acc=0.5213
+Epoch 48/50  loss=0.6913  acc=0.5200
+Epoch 49/50  loss=0.6909  acc=0.5213
+Epoch 50/50  loss=0.6909  acc=0.5200
+Epoch 1/50  loss=0.8569  acc=0.5053
+Epoch 2/50  loss=0.8120  acc=0.5053
+Epoch 3/50  loss=0.7732  acc=0.5147
+Epoch 4/50  loss=0.7408  acc=0.5213
+Epoch 5/50  loss=0.7169  acc=0.5320
+Epoch 6/50  loss=0.7062  acc=0.5307
+Epoch 7/50  loss=0.7003  acc=0.5280
+Epoch 8/50  loss=0.6963  acc=0.5267
+Epoch 9/50  loss=0.6950  acc=0.5240
+Epoch 10/50  loss=0.6947  acc=0.5240
+Epoch 11/50  loss=0.6934  acc=0.5227
+Epoch 12/50  loss=0.6925  acc=0.5227
+Epoch 13/50  loss=0.6923  acc=0.5227
+Epoch 14/50  loss=0.6926  acc=0.5240
+Epoch 15/50  loss=0.6916  acc=0.5240
+Epoch 16/50  loss=0.6923  acc=0.5267
+Epoch 17/50  loss=0.6913  acc=0.5240
+Epoch 18/50  loss=0.6915  acc=0.5293
+Epoch 19/50  loss=0.6913  acc=0.5293
+Epoch 20/50  loss=0.6909  acc=0.5320
+Epoch 21/50  loss=0.6909  acc=0.5320
+Epoch 22/50  loss=0.6911  acc=0.5307
+Epoch 23/50  loss=0.6916  acc=0.5307
+Epoch 24/50  loss=0.6910  acc=0.5293
+Epoch 25/50  loss=0.6907  acc=0.5333
+Epoch 26/50  loss=0.6911  acc=0.5333
+Epoch 27/50  loss=0.6910  acc=0.5360
+Epoch 28/50  loss=0.6909  acc=0.5280
+Epoch 29/50  loss=0.6914  acc=0.5320
+Epoch 30/50  loss=0.6908  acc=0.5347
+Epoch 31/50  loss=0.6911  acc=0.5320
+Epoch 32/50  loss=0.6909  acc=0.5373
+Epoch 33/50  loss=0.6908  acc=0.5400
+Epoch 34/50  loss=0.6907  acc=0.5387
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 340, in <module>
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 223, in sweep_spiral_dim
+    clf = fit_fn(X_train, y_train)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 429, in fit_hybrid_qnn_classifier
+    logits = model(xb)
+             ^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 335, in forward
+    z = self.quantum(x)             # (B, n_qubits * n_measurements)
+        ^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 244, in forward
+    z_sample = self.qnode(x_sample, self.rot, self.ent, bias_rot)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/qnode.py", line 895, in __call__
+    return self._impl_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/qnode.py", line 868, in _impl_call
+    res = execute(
+          ^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/execution.py", line 238, in execute
+    results = run(tapes, device, config, inner_transform)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/run.py", line 345, in run
+    results = ml_execute(tapes, execute_fn, jpc, device=device)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 236, in execute
+    return ExecuteTapes.apply(kwargs, *parameters)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 89, in new_apply
+    flat_out = orig_apply(out_struct_holder, *inp)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/autograd/function.py", line 581, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 93, in new_forward
+    out = orig_fw(ctx, *inp)
+          ^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/interfaces/torch.py", line 158, in forward
+    res = tuple(kwargs["execute_fn"](ctx.tapes))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/jacobian_products.py", line 484, in execute_and_cache_jacobian
+    results, jac = self._dev_execute_and_compute_derivatives(tapes)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/jacobian_products.py", line 448, in _dev_execute_and_compute_derivatives
+    numpy_tapes, _ = qml.transforms.convert_to_numpy_parameters(tapes)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/core/transform_dispatcher.py", line 278, in __call__
+    return self._batch_transform(obj, targs, tkwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/core/transform_dispatcher.py", line 491, in _batch_transform
+    new_tapes, fn = self(t, *targs, **tkwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/core/transform_dispatcher.py", line 255, in __call__
+    transformed_tapes, processing_fn = self._transform(obj, *targs, **tkwargs)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/convert_to_numpy_parameters.py", line 84, in convert_to_numpy_parameters
+    new_circuit = tape.__class__(
+                  ^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/tape/qscript.py", line 134, in __init__
+    self._ops = [] if ops is None else list(ops)
+                                       ^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/convert_to_numpy_parameters.py", line 82, in <genexpr>
+    new_ops = (_convert_op_to_numpy_data(op) for op in tape.operations)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/convert_to_numpy_parameters.py", line 30, in _convert_op_to_numpy_data
+    return qml.ops.functions.bind_new_parameters(op, math.unwrap(op.data))
+                                                     ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/math/multi_dispatch.py", line 835, in unwrap
+    return type(values)(convert(val) for val in values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/math/multi_dispatch.py", line 835, in <genexpr>
+    return type(values)(convert(val) for val in values)
+                        ^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/math/multi_dispatch.py", line 832, in convert
+    return new_val.tolist() if isinstance(new_val, ndarray) and not new_val.shape else new_val
+           ^^^^^^^^^^^^^^^^
+KeyboardInterrupt

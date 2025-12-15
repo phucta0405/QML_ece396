@@ -115,6 +115,7 @@ def train_and_test(dataset: str, model: str):
             x_spiral = np.dstack((x_spiral1.T, x_spiral0.T)).reshape(D_spiral, N_spiral).T
             Y_spiral = np.dstack((np.ones(int(N_spiral / 2)), np.zeros(int(N_spiral / 2)))).flatten().astype(int)
             X_train, X_test, y_train, y_test = train_test_split(x_spiral, Y_spiral, test_size=0.25, random_state=42+run, stratify=Y_spiral)
+            print(X_train[:2])
             clf = fit_fn(X_train, y_train)
             if run == 0 and hasattr(clf, 'parameters'):
                 n_params = sum(p.numel() for p in clf.parameters() if p.requires_grad)
@@ -168,4 +169,6 @@ if __name__ == "__main__":
      Same with kernel choice for SVM in models/classical_svm.py, we can
      use 'rbf' kernel instead of 'linear' by default
     """
+    print(torch.backends.mps.is_available())
+    raise Exception
     main()

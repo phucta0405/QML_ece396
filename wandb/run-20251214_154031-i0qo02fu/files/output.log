@@ -1,0 +1,54 @@
+Epoch 1/50  loss=0.7298  acc=0.6093
+Epoch 2/50  loss=0.7060  acc=0.6213
+Epoch 3/50  loss=0.6922  acc=0.6120
+Epoch 4/50  loss=0.6805  acc=0.6107
+Epoch 5/50  loss=0.6734  acc=0.6000
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 348, in <module>
+    sweep_spiral_dim(list(MODELS.keys()), min_dim=2, max_dim=14, step=1, num_samples=1000, n_runs=3)
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 231, in sweep_spiral_dim
+    clf = fit_fn(X_train, y_train)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 465, in fit_hybrid_qnn_classifier
+    logits = model(X_tensor)
+             ^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 335, in forward
+    z = self.quantum(x)             # (B, n_qubits * n_measurements)
+        ^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_hybrid.py", line 244, in forward
+    z_sample = self.qnode(x_sample, self.rot, self.ent, bias_rot)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/qnode.py", line 895, in __call__
+    return self._impl_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/qnode.py", line 868, in _impl_call
+    res = execute(
+          ^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/workflow/execution.py", line 234, in execute
+    tapes, outer_post_processing = outer_transform(tapes)
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/core/transform_program.py", line 496, in __call__
+    return self.__call_tapes(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/transforms/core/transform_program.py", line 426, in __call_tapes
+    new_tapes, fn = transform(tape, *targs, **tkwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane/devices/preprocess.py", line 539, in validate_measurements
+    if not analytic_measurements(m):
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/pennylane_lightning/lightning_qubit/lightning_qubit.py", line 121, in adjoint_measurements
+    def adjoint_measurements(mp: qml.measurements.MeasurementProcess) -> bool:
+
+KeyboardInterrupt
