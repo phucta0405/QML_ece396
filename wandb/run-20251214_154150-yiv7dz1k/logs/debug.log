@@ -19,3 +19,8 @@ config: {'sweep_type': 'spiral_dim', 'model': 'hybrid_qnn', 'min_dim': 2, 'max_d
 2025-12-14 15:41:51,265 INFO    MainThread:97916 [wandb_run.py:_redirect():2438] Wrapping output streams.
 2025-12-14 15:41:51,265 INFO    MainThread:97916 [wandb_run.py:_redirect():2461] Redirects installed.
 2025-12-14 15:41:51,272 INFO    MainThread:97916 [wandb_init.py:init():1081] run started, returning control to user process
+2025-12-15 01:07:45,160 INFO    MainThread:97916 [wandb_run.py:_finish():2287] finishing run quanntum_ml/qml-classification/yiv7dz1k
+2025-12-15 01:07:45,162 INFO    MainThread:97916 [wandb_run.py:_atexit_cleanup():2486] got exitcode: 0
+2025-12-15 01:07:45,166 INFO    MainThread:97916 [wandb_run.py:_restore():2468] restore
+2025-12-15 01:07:45,166 INFO    MainThread:97916 [wandb_run.py:_restore():2474] restore done
+2025-12-15 01:07:45,952 INFO    MainThread:97916 [wandb_run.py:_footer_sync_info():3862] logging synced files

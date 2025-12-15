@@ -169,6 +169,4 @@ if __name__ == "__main__":
      Same with kernel choice for SVM in models/classical_svm.py, we can
      use 'rbf' kernel instead of 'linear' by default
     """
-    print(torch.backends.mps.is_available())
-    raise Exception
     main()

@@ -1,0 +1,55 @@
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 339, in <module>
+    if __name__ == "__main__":
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 222, in sweep_spiral_dim
+    x_spiral = np.dstack((x_spiral1.T, x_spiral0.T)).reshape(D_spiral, N_spiral).T
+      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 99, in train_vqc
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_minimize.py", line 784, in minimize
+    res = _minimize_lbfgsb(fun, x0, args, jac, bounds,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_lbfgsb_py.py", line 469, in _minimize_lbfgsb
+    f, g = func_and_grad(x)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 404, in fun_and_grad
+    self._update_grad()
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 366, in _update_grad
+    self.g = self._wrapped_grad(self.x, f0=self.f)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 41, in __call__
+    g, dct = approx_derivative(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 593, in approx_derivative
+    J, _nfev = _dense_difference(fun_wrapped, x0, f0, h,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 686, in _dense_difference
+    df = [f_eval - f0 for f_eval in f_evals]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 686, in <listcomp>
+    df = [f_eval - f0 for f_eval in f_evals]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_numdiff.py", line 879, in __call__
+    f = np.atleast_1d(self.fun(x, *self.args, **self.kwargs))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/_util.py", line 590, in __call__
+    fx = self.f(np.copy(x), *self.args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 85, in loss_fn
+  File "/Users/phucta/QML_ece396/models/quantum_vc_vectorized.py", line 74, in vqc_predict_prob_batch
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/utils.py", line 73, in partial_trace
+    ret = state.evolve(tr_op, [qargs[0]])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/densitymatrix.py", line 337, in evolve
+    return other._evolve(self, qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/operators/channel/superop.py", line 286, in _evolve
+    tensor = Operator._einsum_matmul(tensor, mat, indices)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/operators/operator.py", line 775, in _einsum_matmul
+    return np.einsum(tensor, indices_tensor, mat, indices_mat)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/numpy/_core/einsumfunc.py", line 1423, in einsum
+    return c_einsum(*operands, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

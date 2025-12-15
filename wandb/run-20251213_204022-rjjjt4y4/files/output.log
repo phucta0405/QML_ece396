@@ -254,3 +254,75 @@
 40% complete - loss: 0.6019
 50% complete - loss: 0.5945
 60% complete - loss: 0.5845
+70% complete - loss: 0.5773
+80% complete - loss: 0.5728
+90% complete - loss: 0.5714
+100% complete - loss: 0.5697
+10% complete - loss: 0.6487
+20% complete - loss: 0.6238
+30% complete - loss: 0.6111
+40% complete - loss: 0.5929
+50% complete - loss: 0.5844
+60% complete - loss: 0.5777
+70% complete - loss: 0.5751
+80% complete - loss: 0.5741
+90% complete - loss: 0.5725
+100% complete - loss: 0.5699
+10% complete - loss: 0.6569
+20% complete - loss: 0.6223
+30% complete - loss: 0.6008
+40% complete - loss: 0.5892
+Traceback (most recent call last):
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 339, in <module>
+    if __name__ == "__main__":
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/train_wandb.py", line 290, in sweep_nsphere_dim
+    r1, r0 = 1, 0.5
+          ^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/quantum_vc1.py", line 87, in train_vqc1
+    nonlocal iteration_count
+      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_minimize.py", line 784, in minimize
+    res = _minimize_lbfgsb(fun, x0, args, jac, bounds,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_lbfgsb_py.py", line 469, in _minimize_lbfgsb
+    f, g = func_and_grad(x)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 403, in fun_and_grad
+    self._update_fun()
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/optimize/_differentiable_functions.py", line 353, in _update_fun
+    fx = self._wrapped_fun(self.x)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/scipy/_lib/_util.py", line 590, in __call__
+    fx = self.f(np.copy(x), *self.args)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/quantum_vc1.py", line 87, in <lambda>
+    nonlocal iteration_count
+                         ^^^^
+  File "/Users/phucta/QML_ece396/quantum_vc1.py", line 54, in loss
+    preds = np.array([model_function(theta, x, n_layers) for x in X])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/quantum_vc1.py", line 54, in <listcomp>
+    preds = np.array([model_function(theta, x, n_layers) for x in X])
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/quantum_vc1.py", line 44, in model_function
+    sv = prepare_state(x, theta, n_layers)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/QML_ece396/quantum_vc1.py", line 40, in prepare_state
+    return Statevector.from_label("0"*n_qubits).evolve(qc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 400, in evolve
+    return self._evolve_instruction(ret, other, qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 976, in _evolve_instruction
+    Statevector._evolve_instruction(statevec, instruction.operation, qargs=new_qargs)
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 918, in _evolve_instruction
+    return Statevector._evolve_operator(statevec, Operator(mat), qargs=qargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/states/statevector.py", line 891, in _evolve_operator
+    np.dot(oper.data, np.reshape(tensor, contract_shape)),
+           ^^^^^^^^^
+  File "/Users/phucta/envs/cos461/lib/python3.11/site-packages/qiskit/quantum_info/operators/operator.py", line 169, in data
+    @property
+
+KeyboardInterrupt
