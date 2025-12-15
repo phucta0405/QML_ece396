@@ -10,7 +10,7 @@ from models.feed_forward_net import fit_feedforward_classifier, predict_feedforw
 from models.transformer import fit_transformer_classifier, predict_transformer_classifier
 from models.quantum_kernel import fit_quantumkernel_classifier, predict_quantumkernel_classifier
 from models.quantum_hybrid import fit_hybrid_qnn_classifier, predict_hybrid_qnn_classifier
-from quantum_vc1 import train_vqc1, predict_vqc1
+from models.quantum_vc1 import train_vqc1, predict_vqc1
 
 number_of_samples = 1000
 
