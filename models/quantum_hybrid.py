@@ -1,23 +1,6 @@
 """
 Hybrid Quantum-Classical Neural Network (Autodiff + Adam)
 =======================================================
-
-Replaces SPSA with end-to-end differentiation (QNode + PyTorch) and Adam.
-
-Architecture (default):
-    X -> Linear -> tanh -> Quantum Layer -> Linear/MLP -> logits
-    p = sigmoid(logits)
-    CE = -mean(y log p + (1-y) log(1-p)) + L2(theta) + L2(w)
-
-Notes:
-- Uses PennyLane QNodes for autodiff + PyTorch integration.
-- Tries lightning.gpu (GPU) -> lightning.qubit (fast CPU) -> default.qubit (fallback).
-- Supports data re-uploading, optional IsingZZ (RZZ-like) trainable entanglers, and ReLU MLP head.
-
-API matches your project style:
-    modelw = fit_hybrid_qnn_classifier(X_train, y_train, ...)
-    y_pred = predict_hybrid_qnn_classifier(modelw, X_test)
-    p = predict_proba_hybrid_qnn_classifier(modelw, X_test)
 """
 
 from __future__ import annotations
@@ -81,7 +64,7 @@ def _apply_encoding(x: torch.Tensor, wires: List[int], encoding_scale: float, en
         # default: "zz_hybrid"-like (RY + fixed ZZ correlations in a ring)
         qml.AngleEmbedding(encoding_scale * np.pi * x, wires=wires, rotation="Y")
         for i in range(len(wires)):
-            qml.IsingZZ(0.5 * x[i] * x[(i + 1) % len(wires)], wires=[wires[i], wires[wires[(i + 1) % len(wires)]]])
+            qml.IsingZZ(0.5 * x[i] * x[(i + 1) % len(wires)], wires=[wires[i], wires[(i + 1) % len(wires)]])
 
 
 def build_qnode(
@@ -119,6 +102,8 @@ def build_qnode(
         ent_weights: (n_layers, n_qubits) if entangling=="rzz"
         bias_rotations: (n_qubits, 3) for constant bias-like rotations (quantum bias)
         """
+        for i in range(n_qubits):
+            qml.Hadamard(wires=i)
         # Apply quantum bias rotations first (constant, data-independent)
         if bias_rotations is not None:
             for q in range(n_qubits):
@@ -273,7 +258,7 @@ class HybridQNN(nn.Module):
         entangling: Literal["cnot", "rzz"] = "rzz",
         data_reupload: bool = True,
         prefer_q_gpu: bool = True,
-        head: Literal["logistic", "mlp", "minimal", "quantum_only"] = "mlp",
+        head: Literal["logistic", "mlp", "minimal", "quantum_only"] = "quantum_only",
         hidden_dim: int = 8,
         n_measurements: int = 1,  # 1=Z only, 2=Z+X, 3=Z+X+Y (more = more quantum)
         use_quantum_bias: bool = True,  # Use quantum rotations as bias
@@ -363,7 +348,7 @@ def fit_hybrid_qnn_classifier(
     data_reupload: bool = True,
     head: Literal["logistic", "mlp", "minimal", "quantum_only"] = "quantum_only",
     hidden_dim: int = 8,
-    n_measurements: int = 1,  # 1=Z only, 2=Z+X, 3=Z+X+Y (more = more quantum features)
+    n_measurements: int = 3,  # 1=Z only, 2=Z+X, 3=Z+X+Y (more = more quantum features)
     use_quantum_bias: bool = True,  # Use quantum rotations as bias (replaces classical bias)
     use_quantum_weights: bool = True,  # Use quantum scaling as weights (replaces classical weights)
     epochs: int = 50,
@@ -413,7 +398,7 @@ def fit_hybrid_qnn_classifier(
     loader = DataLoader(ds, batch_size=batch_size, shuffle=True, drop_last=False)
 
     criterion = nn.BCEWithLogitsLoss()
-    opt = optim.Adam(model.parameters(), lr=lr)
+    opt = optim.AdamW(model.parameters(), lr=lr)
 
     history: List[float] = []
 

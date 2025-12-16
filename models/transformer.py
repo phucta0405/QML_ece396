@@ -7,8 +7,8 @@ import torch
 import torch.nn as nn
 
 class TransformerClassifier(nn.Module):
-    def __init__(self, input_dim, num_classes=2, d_model=1, nhead=2,
-                 num_layers=1, dim_feedforward=2, dropout=0, use_cls=True):
+    def __init__(self, input_dim, num_classes=2, d_model=2, nhead=2,
+                 num_layers=2, dim_feedforward=8, dropout=0, use_cls=True):
         super().__init__()
         self.input_dim = input_dim
         self.use_cls = use_cls
@@ -48,7 +48,7 @@ class TransformerClassifier(nn.Module):
 
 
 
-def fit_transformer_classifier(X: np.ndarray, Y: np.ndarray, num_classes=2, d_model=2, nhead=2, num_layers=1, dim_feedforward=8, dropout=0.1, epochs=100, lr=0.001, verbose=False, use_cls=True) -> TransformerClassifier:
+def fit_transformer_classifier(X: np.ndarray, Y: np.ndarray, num_classes=2, d_model=4, nhead=2, num_layers=2, dim_feedforward=8, dropout=0.1, epochs=100, lr=0.001, verbose=False, use_cls=True) -> TransformerClassifier:
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     X_tensor = torch.tensor(X, dtype=torch.float32).to(device)
     Y_tensor = torch.tensor(Y, dtype=torch.long).to(device)
